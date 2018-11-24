@@ -18,13 +18,13 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                    mTextMessage.setText("Receiver");
                     return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+                case R.id.navigation_sender:
+                    mTextMessage.setText("Sender");
                     return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                case R.id.navigation_history:
+                    mTextMessage.setText("History");
                     return true;
             }
             return false;
@@ -39,6 +39,28 @@ public class MainActivity extends AppCompatActivity {
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+
+
+
+        //================Weibin Start================
+
+        //================Weibin End================
+
+
+        //================Kelvin Start================
+
+        //================Kelvin End================
     }
+
+
+    //================Weibin Start================
+
+    //================Weibin End================
+
+
+    //================Kelvin Start================
+
+    //================Kelvin End================
 
 }
