@@ -9,9 +9,8 @@ public class User {
         this.password = password;
     }
 
-    //Setters
 
-
+    //Getters
     public String getUid() {
         return uid;
     }
