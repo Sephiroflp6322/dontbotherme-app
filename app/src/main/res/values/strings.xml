@@ -1,6 +1,9 @@
 <resources>
-    <string name="app_name">Don't Border Me</string>
+    <string name="app_name">Dont Border Me</string>
     <string name="title_home">Receiver</string>
     <string name="title_dashboard">Sender</string>
     <string name="title_notifications">History</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
