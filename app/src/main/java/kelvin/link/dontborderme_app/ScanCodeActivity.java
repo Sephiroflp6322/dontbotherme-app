@@ -1,11 +1,16 @@
 package kelvin.link.dontborderme_app;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.zxing.Result;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
+
+import static retrofit2.converter.gson.GsonConverterFactory.create;
 
 public class ScanCodeActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
 
@@ -19,8 +24,11 @@ public class ScanCodeActivity extends AppCompatActivity implements ZXingScannerV
 
     @Override
     public void handleResult(Result result) {
-
+        //TODO Handling qr code scan result here
+        //MainActivity.resultTextView.setText(result.getText());
+        onBackPressed();
     }
+
 
     @Override
     protected void onPause(){
@@ -30,8 +38,8 @@ public class ScanCodeActivity extends AppCompatActivity implements ZXingScannerV
 
     @Override
     protected void onResume() {
-
         super.onResume();
+        ScannerView.setResultHandler(this);
         ScannerView.startCamera();
     }
 }

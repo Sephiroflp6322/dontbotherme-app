@@ -18,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
     //for scan QR code
     Button scan_btn;
+    public static TextView resultTextView;
+
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
              = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -55,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         //================Weibin Start================
         scan_btn = (Button) findViewById(R.id.btn_scan);
+        resultTextView = (TextView)findViewById(R.id.result_text);
         scan_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
