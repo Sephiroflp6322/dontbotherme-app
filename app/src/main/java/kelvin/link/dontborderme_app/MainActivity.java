@@ -1,10 +1,7 @@
 package kelvin.link.dontborderme_app;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.service.autofill.FillEventHistory;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -22,13 +19,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-             = new BottomNavigationView.OnNavigationItemSelectedListener() {
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-            android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     mTextMessage.setText("Receiver");
@@ -54,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
-
-
         //================Weibin Start================
         scan_btn = (Button) findViewById(R.id.btn_scan);
         resultTextView = (TextView)findViewById(R.id.result_text);
@@ -65,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),ScanCodeActivity.class));
             }
         });
+
         //================Weibin End================
 
 
@@ -74,13 +67,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //================Weibin Start================
-
-    //================Weibin End================
-
-
-    //================Kelvin Start================
-
-    //================Kelvin End================
 
 }
