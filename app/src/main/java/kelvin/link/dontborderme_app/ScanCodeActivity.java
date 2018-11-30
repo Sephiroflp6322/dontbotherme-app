@@ -25,7 +25,7 @@ public class ScanCodeActivity extends AppCompatActivity implements ZXingScannerV
     @Override
     public void handleResult(Result result) {
         //TODO Handling qr code scan result here
-        //MainActivity.resultTextView.setText(result.getText());
+        MainActivity.resultTextView.setText(result.getText());
         onBackPressed();
     }
 

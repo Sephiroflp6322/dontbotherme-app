@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Don't Border Me</string>
+    <string name="app_name">DontBorder Me</string>
     <string name="title_home">Receiver</string>
     <string name="title_dashboard">Sender</string>
     <string name="title_notifications">History</string>
