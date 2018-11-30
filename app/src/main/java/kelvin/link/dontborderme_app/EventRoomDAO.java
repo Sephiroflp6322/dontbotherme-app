@@ -17,8 +17,11 @@ public interface EventRoomDAO {
     @Update
     void update(EventRoom event);
 
-    @Query("DELETE FROM user_event_room WHERE uid = :uid AND event_id = :event_id")
-    void delete(String uid, Integer event_id);
+    /*@Query("DELETE FROM user_event_room WHERE uid = :uid AND event_id = :event_id")
+    void delete(String uid, Integer event_id);*/
+
+    @Query("DELETE FROM user_event_room WHERE event_id = :event_id")
+    void delete(Integer event_id);
 
     @Query("DELETE FROM user_event_room")
     void deleteAllEvents();

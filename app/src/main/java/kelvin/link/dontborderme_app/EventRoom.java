@@ -1,13 +1,14 @@
 package kelvin.link.dontborderme_app;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-@Entity(tableName = "user_event_room", primaryKeys = {"uid", "event_id"})
+@Entity(tableName = "user_event_room")
 public class EventRoom {
-    @NonNull
-    private String uid;
-    @NonNull
+    //@NonNull
+    //private String uid;
+    @PrimaryKey(autoGenerate = true)
     private Integer event_id;
     private String event_title;
     private String address;
@@ -15,9 +16,9 @@ public class EventRoom {
     private String role;
     private String start_ts;
 
-    public EventRoom(String uid, Integer event_id, String event_title,
+    public EventRoom(Integer event_id, String event_title,
                      String address, String description, String role, String start_ts) {
-        setUid(uid);
+        //setUid(uid);
         setEvent_id(event_id);
         setEvent_title(event_title);
         setAddress(address);
@@ -27,9 +28,9 @@ public class EventRoom {
     }
 
     //Getters
-    public String getUid() {
+    /*public String getUid() {
         return uid;
-    }
+    }*/
 
     public Integer getEvent_id() {
         return event_id;
@@ -57,9 +58,9 @@ public class EventRoom {
 
 
     //Setters
-    public void setUid(String uid) {
+    /*public void setUid(String uid) {
         this.uid = uid;
-    }
+    }*/
 
     public void setEvent_id(Integer event_id) {
         this.event_id = event_id;

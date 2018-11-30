@@ -96,7 +96,7 @@ public class AddEditEventActivity extends AppCompatActivity implements DatePicke
         data.putExtra(EXTRA_EVENT_TITLE, title);
         data.putExtra(EXTRA_ADDRESS, address);
         data.putExtra(EXTRA_DESCRIPTION, description);
-        data.putExtra(EXTRA_DESCRIPTION, start_ts);
+        data.putExtra(EXTRA_START_TS, start_ts);
 
         //Check whether EXTRA_EVENT_ID exist in Extra. If not, this is a new event.(event_id = -1)
         //Otherwise, this is an event that's already exist.

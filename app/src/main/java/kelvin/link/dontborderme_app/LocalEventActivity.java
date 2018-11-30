@@ -99,9 +99,9 @@ public class LocalEventActivity extends AppCompatActivity{
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 //viewHolder.getAdapterPosition()
                 EventRoom swipedEvent = adapter.getEventAt(viewHolder.getAdapterPosition());
-                String uid = swipedEvent.getUid();
+                //String uid = swipedEvent.getUid();
                 Integer event_id = swipedEvent.getEvent_id();
-                eventRoomViewModel.delete(uid, event_id);
+                eventRoomViewModel.delete(event_id);
                 Toast.makeText(LocalEventActivity.this, "Event deleted", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
@@ -138,8 +138,8 @@ public class LocalEventActivity extends AppCompatActivity{
 
 
             //TODO event_id should be compatible with server
-            String uid = userManager.getUser().getUid();
-            EventRoom event = new EventRoom(uid, 99 , event_title, address,description, "s",null);
+            //String uid = userManager.getUser().getUid();
+            EventRoom event = new EventRoom(null , event_title, address,description, "s",null);
             eventRoomViewModel.insert(event);
 
             Toast.makeText(this, "Event saved", Toast.LENGTH_SHORT).show();
@@ -155,8 +155,8 @@ public class LocalEventActivity extends AppCompatActivity{
             String address = data.getStringExtra(AddEditEventActivity.EXTRA_ADDRESS);
             String description = data.getStringExtra(AddEditEventActivity.EXTRA_DESCRIPTION);
 
-            String uid = userManager.getUser().getUid();
-            EventRoom eventRoom = new EventRoom(uid, event_id ,event_title, address,description,"s",null);
+            //String uid = userManager.getUser().getUid();
+            EventRoom eventRoom = new EventRoom(event_id ,event_title, address, description,"s",null);
             eventRoom.setEvent_id(event_id);
             eventRoomViewModel.update(eventRoom);
 

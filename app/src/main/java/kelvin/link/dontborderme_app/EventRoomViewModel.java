@@ -28,8 +28,12 @@ public class EventRoomViewModel extends AndroidViewModel {
         repository.update(event);
     }
 
-    public void delete(String uid, Integer event_id){
+    /*public void delete(String uid, Integer event_id){
         repository.delete(uid ,event_id);
+    }*/
+
+    public void delete(Integer event_id){
+        repository.delete(event_id);
     }
 
     public void deleteAllEvents(){

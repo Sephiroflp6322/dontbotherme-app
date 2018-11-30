@@ -25,8 +25,8 @@ public class EventRoomRepository {
         new UpdateEventAsyncTask(eventRoomDAO).execute(eventRoom);
     }
 
-    public void delete(String uid, Integer event_id ){
-        new DeleteEventAsyncTask(eventRoomDAO).execute(uid, String.valueOf(event_id));
+    public void delete(Integer event_id ){
+        new DeleteEventAsyncTask(eventRoomDAO).execute(String.valueOf(event_id));
     }
 
     public void deleteAllEvents(){
@@ -76,9 +76,9 @@ public class EventRoomRepository {
 
         @Override
         protected Void doInBackground(String... params) {
-            String uid = params[0];
-            Integer event_id = Integer.parseInt(params[1]);
-            eventRoomDAO.delete(uid, event_id);
+            //String uid = params[0];
+            Integer event_id = Integer.parseInt(params[0]);
+            eventRoomDAO.delete(event_id);
             return null;
         }
     }
