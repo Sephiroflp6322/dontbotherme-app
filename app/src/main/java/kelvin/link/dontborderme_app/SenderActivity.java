@@ -16,12 +16,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
+
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.List;
 
-public class SenderActivity extends AppCompatActivity {
+public class SenderActivity extends AppCompatActivity{
     public static final int ADD_EVENT_REQUEST = 1;
     public static final int EDIT_EVENT_REQUEST = 2;
     private EventRoomViewModel eventRoomViewModel;
@@ -56,6 +57,7 @@ public class SenderActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.sender_activity_navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_sender);
+
 
 
         //Configurating Recyclerview
@@ -120,7 +122,6 @@ public class SenderActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
 
@@ -128,6 +129,7 @@ public class SenderActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        UserManager userManager = UserManager.getInstance();
         //Insert a new event or update an existing event
         if(requestCode == ADD_EVENT_REQUEST && resultCode == RESULT_OK){
 
@@ -136,9 +138,8 @@ public class SenderActivity extends AppCompatActivity {
             String description = data.getStringExtra(AddEditEventActivity.EXTRA_DESCRIPTION);
 
 
-
-            //TODO Use UserManager instead
-            String uid = "kelvin@gmail.com";
+            //TODO event_id should be compatible with server
+            String uid = userManager.getUser().getUid();
             EventRoom event = new EventRoom(uid, 99 , event_title, address,description, "s",null);
             eventRoomViewModel.insert(event);
 
@@ -155,9 +156,7 @@ public class SenderActivity extends AppCompatActivity {
             String address = data.getStringExtra(AddEditEventActivity.EXTRA_ADDRESS);
             String description = data.getStringExtra(AddEditEventActivity.EXTRA_DESCRIPTION);
 
-            //TODO Use UserManager instead
-            //TODO Need to configure uid, event_id
-            String uid = "kelvin@gmail.com";
+            String uid = userManager.getUser().getUid();
             EventRoom eventRoom = new EventRoom(uid, event_id ,event_title, address,description,"s",null);
             eventRoom.setEvent_id(event_id);
             eventRoomViewModel.update(eventRoom);
@@ -188,5 +187,7 @@ public class SenderActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
 
 }

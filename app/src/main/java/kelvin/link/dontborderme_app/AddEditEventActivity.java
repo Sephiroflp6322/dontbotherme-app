@@ -1,15 +1,22 @@
 package kelvin.link.dontborderme_app;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class AddEditEventActivity extends AppCompatActivity {
+import java.text.DateFormat;
+import java.util.Calendar;
+
+public class AddEditEventActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
     public static final String EXTRA_EVENT_ID= "EXTRA_EVENT_ID";
     public static final String EXTRA_EVENT_TITLE= "EXTRA_EVENT_TITLE";
     public static final String EXTRA_ADDRESS = "EXTRA_ADDRESS";
@@ -21,6 +28,8 @@ public class AddEditEventActivity extends AppCompatActivity {
     private EditText editTextTitle;
     private EditText editTextAddress;
     private EditText editTextDescription;
+    private String start_ts;
+
 
 
     @Override
@@ -45,6 +54,17 @@ public class AddEditEventActivity extends AppCompatActivity {
         }else{
             setTitle("Add Event");
         }
+
+
+        //Date picker
+        Button button = (Button)findViewById(R.id.btn_date_picker);
+        button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                DatePickerFragment datePicker = new DatePickerFragment();
+                datePicker.show(getSupportFragmentManager(), "" + "Date picker");
+            }
+        });
     }
 
     private void saveEvent(){
@@ -61,6 +81,7 @@ public class AddEditEventActivity extends AppCompatActivity {
         data.putExtra(EXTRA_EVENT_TITLE, title);
         data.putExtra(EXTRA_ADDRESS, address);
         data.putExtra(EXTRA_DESCRIPTION, description);
+        data.putExtra(EXTRA_DESCRIPTION, start_ts);
 
         //Check whether EXTRA_EVENT_ID exist in Extra. If not, this is a new event.(event_id = -1)
         //Otherwise, this is an event that's already exist.
@@ -89,5 +110,18 @@ public class AddEditEventActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+        Calendar calendar;
+        calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, i);
+        calendar.set(Calendar.MONTH, i1);
+        calendar.set(Calendar.DAY_OF_MONTH, i2);
+        //TODO Need to transform to string timestamp format
+        start_ts = "2018-11-30 22:34:12";
+        //start_ts = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
     }
 }
