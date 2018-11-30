@@ -1,6 +1,7 @@
 package kelvin.link.dontborderme_app;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,12 +12,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.util.Calendar;
 
-public class AddEditEventActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
+public class AddEditEventActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
     public static final String EXTRA_EVENT_ID= "EXTRA_EVENT_ID";
     public static final String EXTRA_EVENT_TITLE= "EXTRA_EVENT_TITLE";
     public static final String EXTRA_ADDRESS = "EXTRA_ADDRESS";
@@ -30,7 +33,7 @@ public class AddEditEventActivity extends AppCompatActivity implements DatePicke
     private EditText editTextDescription;
     private String start_ts;
 
-
+    private TextView textViewDateTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,7 @@ public class AddEditEventActivity extends AppCompatActivity implements DatePicke
         editTextTitle = findViewById(R.id.edit_text_title);
         editTextAddress = findViewById(R.id.edit_text_address);
         editTextDescription = findViewById(R.id.edit_text_description);
+        textViewDateTime = (TextView)findViewById(R.id.textView_DateTime);
 
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
@@ -57,14 +61,26 @@ public class AddEditEventActivity extends AppCompatActivity implements DatePicke
 
 
         //Date picker
-        Button button = (Button)findViewById(R.id.btn_date_picker);
-        button.setOnClickListener(new View.OnClickListener(){
+        Button DatePicker_Btn = (Button)findViewById(R.id.btn_date_picker);
+        DatePicker_Btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 DatePickerFragment datePicker = new DatePickerFragment();
                 datePicker.show(getSupportFragmentManager(), "" + "Date picker");
             }
         });
+
+        //Time Picker
+        Button TimePicker_Btn = (Button)findViewById(R.id.btn_time_picker);
+        TimePicker_Btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                TimePickerFragment timePicker = new TimePickerFragment();
+                timePicker.show(getSupportFragmentManager(), "Time picker");
+            }
+        });
+
+
     }
 
     private void saveEvent(){
@@ -121,7 +137,16 @@ public class AddEditEventActivity extends AppCompatActivity implements DatePicke
         calendar.set(Calendar.MONTH, i1);
         calendar.set(Calendar.DAY_OF_MONTH, i2);
         //TODO Need to transform to string timestamp format
-        start_ts = "2018-11-30 22:34:12";
+        start_ts = "2018-11-30 00:00:00";
+        textViewDateTime.setText(start_ts);
         //start_ts = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+    }
+
+    @Override
+    public void onTimeSet(TimePicker timePicker, int i, int i1) {
+        start_ts = "2018-11-30 23:03:00";
+        textViewDateTime.setText(start_ts);
+        //TextView textView = (TextView)findViewById(R.id.textView);
+        //textView.setText("Hour: " + i + " Minute: " + i1);
     }
 }
