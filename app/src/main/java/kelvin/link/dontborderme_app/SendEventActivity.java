@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class SendEventActivity extends AppCompatActivity {
     //For scan QR code
     Button scan_btn;
     public static TextView resultTextView;
@@ -22,14 +22,14 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    //Intent main_intent = new Intent(MainActivity.this, MainActivity.class);
-                    //startActivity(main_intent);
-                    return true;
-                case R.id.navigation_sender:
-                    Intent sender_intent = new Intent(MainActivity.this, SenderActivity.class);
+                    Intent sender_intent = new Intent(SendEventActivity.this, LocalEventActivity.class);
                     startActivity(sender_intent);
                     return true;
-                case R.id.navigation_history:
+                case R.id.navigation_sender:
+                    //Intent main_intent = new Intent(SendEventActivity.this, SendEventActivity.class);
+                    //startActivity(main_intent);
+                    return true;
+                case R.id.navigation_subscriber:
                     return true;
             }
             return false;
@@ -39,11 +39,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_send_event);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.main_activity_navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        navigation.setSelectedItemId(R.id.navigation_home);
+        navigation.setSelectedItemId(R.id.navigation_sender);
 
 
         //================Weibin Start================

@@ -1,10 +1,7 @@
 package kelvin.link.dontborderme_app;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.google.zxing.Result;
 
@@ -25,7 +22,7 @@ public class ScanCodeActivity extends AppCompatActivity implements ZXingScannerV
     @Override
     public void handleResult(Result result) {
         //TODO Handling qr code scan result here
-        MainActivity.resultTextView.setText(result.getText());
+        SendEventActivity.resultTextView.setText(result.getText());
         onBackPressed();
     }
 

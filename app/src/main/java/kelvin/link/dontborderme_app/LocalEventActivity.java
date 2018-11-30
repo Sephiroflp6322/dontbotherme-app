@@ -17,12 +17,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.List;
 
-public class SenderActivity extends AppCompatActivity{
+public class LocalEventActivity extends AppCompatActivity{
     public static final int ADD_EVENT_REQUEST = 1;
     public static final int EDIT_EVENT_REQUEST = 2;
     private EventRoomViewModel eventRoomViewModel;
@@ -35,14 +34,14 @@ public class SenderActivity extends AppCompatActivity{
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    Intent main_intent = new Intent(SenderActivity.this, MainActivity.class);
-                    startActivity(main_intent);
-                    return true;
-                case R.id.navigation_sender:
-                    //Intent sender_intent = new Intent(SenderActivity.this, SenderActivity.class);
+                    //Intent sender_intent = new Intent(SendEventActivity.this, LocalEventActivity.class);
                     //startActivity(sender_intent);
                     return true;
-                case R.id.navigation_history:
+                case R.id.navigation_sender:
+                    Intent main_intent = new Intent(LocalEventActivity.this, SendEventActivity.class);
+                    startActivity(main_intent);
+                    return true;
+                case R.id.navigation_subscriber:
                     return true;
             }
             return false;
@@ -52,11 +51,11 @@ public class SenderActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sender);
+        setContentView(R.layout.activity_local);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.sender_activity_navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        navigation.setSelectedItemId(R.id.navigation_sender);
+        navigation.setSelectedItemId(R.id.navigation_home);
 
 
 
@@ -83,7 +82,7 @@ public class SenderActivity extends AppCompatActivity{
         buttonAddNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SenderActivity.this, AddEditEventActivity.class);
+                Intent intent = new Intent(LocalEventActivity.this, AddEditEventActivity.class);
                 startActivityForResult(intent, ADD_EVENT_REQUEST);
             }
         });
@@ -103,7 +102,7 @@ public class SenderActivity extends AppCompatActivity{
                 String uid = swipedEvent.getUid();
                 Integer event_id = swipedEvent.getEvent_id();
                 eventRoomViewModel.delete(uid, event_id);
-                Toast.makeText(SenderActivity.this, "Event deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LocalEventActivity.this, "Event deleted", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
 
@@ -112,7 +111,7 @@ public class SenderActivity extends AppCompatActivity{
         adapter.setOnItemClickListener(new EventAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(EventRoom event) {
-                Intent intent = new Intent(SenderActivity.this, AddEditEventActivity.class);
+                Intent intent = new Intent(LocalEventActivity.this, AddEditEventActivity.class);
                 intent.putExtra(AddEditEventActivity.EXTRA_EVENT_ID, event.getEvent_id());
                 intent.putExtra(AddEditEventActivity.EXTRA_EVENT_TITLE, event.getEvent_title());
                 intent.putExtra(AddEditEventActivity.EXTRA_ADDRESS, event.getAddress());

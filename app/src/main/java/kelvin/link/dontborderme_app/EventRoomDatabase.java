@@ -17,7 +17,7 @@ public abstract class EventRoomDatabase extends RoomDatabase {
     public static synchronized EventRoomDatabase getInstance(Context context){
         if(instance == null){
             instance = Room.databaseBuilder(context.getApplicationContext(),
-                    EventRoomDatabase.class, "dontborderme_database")
+                    EventRoomDatabase.class, "dontbotherme_database")
                     .fallbackToDestructiveMigration()
                     .addCallback(roomCallback)
                     .build();
@@ -42,14 +42,7 @@ public abstract class EventRoomDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            //TODO Should fetch data from webservice
-            eventDAO.insert(new EventRoom("kelvin@gmail.com", 1, "Go shopping",
-                    "Hongkong", "Description","s", null));
-            eventDAO.insert(new EventRoom("kelvin@gmail.com", 2, "Go shopping",
-                    "Macao", "Description","r", null));
-            eventDAO.insert(new EventRoom("kelvin@gmail.com", 3, "Go shopping",
-                    "Taiwan", "Description","r", null));
-
+            //Do nothing
             return null;
         }
     }

@@ -9,11 +9,11 @@
     <item
         android:id="@+id/navigation_sender"
         android:icon="@drawable/ic_add_event"
-        android:title="@string/title_dashboard" />
+        android:title="@string/title_send" />
 
     <item
-        android:id="@+id/navigation_history"
-        android:icon="@drawable/ic_history"
-        android:title="@string/title_notifications" />
+        android:id="@+id/navigation_subscriber"
+        android:icon="@drawable/ic_subscribe"
+        android:title="@string/title_subscribe" />
 
 </menu>

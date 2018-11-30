@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.text.DateFormat;
 import java.util.Calendar;
 
 public class AddEditEventActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
@@ -38,7 +37,7 @@ public class AddEditEventActivity extends AppCompatActivity implements DatePicke
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_event);
+        setContentView(R.layout.activity_add_edit);
 
         editTextTitle = findViewById(R.id.edit_text_title);
         editTextAddress = findViewById(R.id.edit_text_address);
