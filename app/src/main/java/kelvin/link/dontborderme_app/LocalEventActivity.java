@@ -116,6 +116,7 @@ public class LocalEventActivity extends AppCompatActivity{
                 intent.putExtra(AddEditEventActivity.EXTRA_EVENT_TITLE, event.getEvent_title());
                 intent.putExtra(AddEditEventActivity.EXTRA_ADDRESS, event.getAddress());
                 intent.putExtra(AddEditEventActivity.EXTRA_DESCRIPTION, event.getDescription());
+                intent.putExtra(AddEditEventActivity.EXTRA_START_TS, event.getStart_ts());
 
                 startActivityForResult(intent, EDIT_EVENT_REQUEST);
             }
@@ -135,11 +136,12 @@ public class LocalEventActivity extends AppCompatActivity{
             String event_title = data.getStringExtra(AddEditEventActivity.EXTRA_EVENT_TITLE);
             String address = data.getStringExtra(AddEditEventActivity.EXTRA_ADDRESS);
             String description = data.getStringExtra(AddEditEventActivity.EXTRA_DESCRIPTION);
+            String start_ts = data.getStringExtra(AddEditEventActivity.EXTRA_START_TS);
 
 
             //TODO event_id should be compatible with server
             //String uid = userManager.getUser().getUid();
-            EventRoom event = new EventRoom(null , event_title, address,description, "s",null);
+            EventRoom event = new EventRoom(null , event_title, address,description, "s",start_ts);
             eventRoomViewModel.insert(event);
 
             Toast.makeText(this, "Event saved", Toast.LENGTH_SHORT).show();
@@ -154,9 +156,10 @@ public class LocalEventActivity extends AppCompatActivity{
             String event_title = data.getStringExtra(AddEditEventActivity.EXTRA_EVENT_TITLE);
             String address = data.getStringExtra(AddEditEventActivity.EXTRA_ADDRESS);
             String description = data.getStringExtra(AddEditEventActivity.EXTRA_DESCRIPTION);
+            String start_ts = data.getStringExtra(AddEditEventActivity.EXTRA_START_TS);
 
             //String uid = userManager.getUser().getUid();
-            EventRoom eventRoom = new EventRoom(event_id ,event_title, address, description,"s",null);
+            EventRoom eventRoom = new EventRoom(event_id ,event_title, address, description,"s",start_ts);
             eventRoom.setEvent_id(event_id);
             eventRoomViewModel.update(eventRoom);
 

@@ -20,7 +20,9 @@
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/event_item"/>
+            tools:listitem="@layout/event_item"
+            android:scrollbars="vertical"
+            android:layout_marginBottom="70dp"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/button_add_note"
@@ -36,11 +38,10 @@
 
 
 
-
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/sender_activity_navigation"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_marginEnd="0dp"
         android:layout_marginStart="0dp"
         android:background="?android:attr/windowBackground"

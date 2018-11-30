@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.sql.Timestamp;
 import java.util.Calendar;
 
 public class AddEditEventActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
@@ -32,6 +33,7 @@ public class AddEditEventActivity extends AppCompatActivity implements DatePicke
     private EditText editTextDescription;
     private String start_ts;
 
+    private Calendar calendar;
     private TextView textViewDateTime;
 
     @Override
@@ -44,6 +46,7 @@ public class AddEditEventActivity extends AppCompatActivity implements DatePicke
         editTextDescription = findViewById(R.id.edit_text_description);
         textViewDateTime = (TextView)findViewById(R.id.textView_DateTime);
 
+        calendar = Calendar.getInstance();
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
 
@@ -54,6 +57,7 @@ public class AddEditEventActivity extends AppCompatActivity implements DatePicke
             editTextTitle.setText(intent.getStringExtra(EXTRA_EVENT_TITLE));
             editTextAddress.setText(intent.getStringExtra(EXTRA_ADDRESS));
             editTextDescription.setText(intent.getStringExtra(EXTRA_DESCRIPTION));
+            textViewDateTime.setText(intent.getStringExtra(EXTRA_START_TS));
         }else{
             setTitle("Add Event");
         }
@@ -130,22 +134,22 @@ public class AddEditEventActivity extends AppCompatActivity implements DatePicke
 
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-        Calendar calendar;
-        calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, i);
+        //TODO [low priority] Need to refactor timestamp generation
+        calendar.set(Calendar.YEAR, i-1900);
         calendar.set(Calendar.MONTH, i1);
         calendar.set(Calendar.DAY_OF_MONTH, i2);
-        //TODO Need to transform to string timestamp format
-        start_ts = "2018-11-30 00:00:00";
+        start_ts = String.valueOf(i) + "-" + String.valueOf(i1)+ "-" + String.valueOf(i2);
         textViewDateTime.setText(start_ts);
         //start_ts = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
     }
 
     @Override
     public void onTimeSet(TimePicker timePicker, int i, int i1) {
-        start_ts = "2018-11-30 23:03:00";
+        //TODO [low priority] Need to refactor timestamp generation
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        start_ts = new Timestamp(year, month, day, i, i1, 0, 0).toString().substring(0, 19);
         textViewDateTime.setText(start_ts);
-        //TextView textView = (TextView)findViewById(R.id.textView);
-        //textView.setText("Hour: " + i + " Minute: " + i1);
     }
 }
