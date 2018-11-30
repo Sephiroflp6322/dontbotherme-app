@@ -26,7 +26,7 @@ public class AddEditEventActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_note);
+        setContentView(R.layout.activity_add_event);
 
         editTextTitle = findViewById(R.id.edit_text_title);
         editTextAddress = findViewById(R.id.edit_text_address);

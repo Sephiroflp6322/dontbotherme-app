@@ -3,4 +3,5 @@
     <string name="title_home">Receiver</string>
     <string name="title_dashboard">Sender</string>
     <string name="title_notifications">History</string>
+    <string name="title_activity_sender">SenderActivity</string>
 </resources>
