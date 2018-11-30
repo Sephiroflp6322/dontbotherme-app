@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    Intent main_intent = new Intent(MainActivity.this, MainActivity.class);
-                    startActivity(main_intent);
+                    //Intent main_intent = new Intent(MainActivity.this, MainActivity.class);
+                    //startActivity(main_intent);
                     return true;
                 case R.id.navigation_sender:
                     Intent sender_intent = new Intent(MainActivity.this, SenderActivity.class);

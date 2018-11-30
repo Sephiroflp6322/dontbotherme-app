@@ -38,8 +38,8 @@ public class SenderActivity extends AppCompatActivity {
                     startActivity(main_intent);
                     return true;
                 case R.id.navigation_sender:
-                    Intent sender_intent = new Intent(SenderActivity.this, SenderActivity.class);
-                    startActivity(sender_intent);
+                    //Intent sender_intent = new Intent(SenderActivity.this, SenderActivity.class);
+                    //startActivity(sender_intent);
                     return true;
                 case R.id.navigation_history:
                     return true;
