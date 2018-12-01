@@ -11,9 +11,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class SendEventActivity extends AppCompatActivity {
-    //For scan QR code
-    Button scan_btn;
-    public static TextView resultTextView;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -48,24 +45,6 @@ public class SendEventActivity extends AppCompatActivity {
         navigation.setSelectedItemId(R.id.navigation_sender);
 
 
-        //================Weibin Start================
-        scan_btn = (Button) findViewById(R.id.btn_scan);
-        resultTextView = (TextView)findViewById(R.id.result_text);
-        scan_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),ScanCodeActivity.class));
-            }
-        });
-
-        //================Weibin End================
-
-
-        //================Kelvin Start================
-
-        //================Kelvin End================
     }
-
-
 
 }

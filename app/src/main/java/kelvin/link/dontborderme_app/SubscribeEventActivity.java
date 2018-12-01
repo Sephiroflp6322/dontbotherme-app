@@ -12,10 +12,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -105,12 +108,16 @@ public class SubscribeEventActivity extends AppCompatActivity {
             }
         });
 
-        getAllUserEvents(user.getUid());
-
 
     }
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        getAllUserEvents(user.getUid());
+    }
 
     public void removeItem(int position){
         eventItemArrayList.remove(position);
@@ -175,6 +182,27 @@ public class SubscribeEventActivity extends AppCompatActivity {
                 Log.i(logMessage, "_deleteEvent(); Fialure message: " + t.getMessage());
             }
         });
+    }
+
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.subscribe_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.scan_qr_code:
+                startActivity(new Intent(getApplicationContext(),ScanCodeActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 
