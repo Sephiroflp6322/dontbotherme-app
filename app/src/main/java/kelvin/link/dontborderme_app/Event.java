@@ -8,10 +8,7 @@ public class Event {
     private Integer event_id;
     private String event_title;
     private String address;
-
-    @SerializedName("body")
     private String description;
-
     private String role;
     private String start_ts;
 

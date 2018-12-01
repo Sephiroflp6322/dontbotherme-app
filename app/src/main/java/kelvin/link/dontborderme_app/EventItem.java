@@ -24,7 +24,6 @@ public class EventItem {
 
 
     //Setters
-
     public void setmImageResource(int mImageResource) {
         this.mImageResource = mImageResource;
     }

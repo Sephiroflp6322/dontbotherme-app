@@ -101,21 +101,13 @@ public class SubscribeEventActivity extends AppCompatActivity {
 
 
         String uid = UserManager.getInstance().getUser().getUid();
-        /*WebServiceDAO webServiceDAO = new WebServiceDAO();
-        try {
-            webServiceDAO.fetchAllUserEvents(uid);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
 
         getAllUserEvents(uid);
 
+
     }
 
 
-    public void insertItem(int position){
-        mAdapter.notifyItemInserted(position);
-    }
 
     public void removeItem(int position){
         eventItemArrayList.remove(position);
@@ -124,18 +116,11 @@ public class SubscribeEventActivity extends AppCompatActivity {
 
 
     private void updateAdapter(List<Event> events){
-        List<EventItem> itemsForAdapter = new ArrayList<>();
-        for(Event e : events){
-            itemsForAdapter.add(new EventItem(0, e));
+        eventItemArrayList.clear();
+        for(Event e: events){
+            eventItemArrayList.add(new EventItem(R.drawable.ic_remind, e));
+            Log.i(logMessage, "description: " + e.getRole());
         }
-
-        //For debug
-        List<Event> result = events;
-        for(Event e: result){
-            Log.i(logMessage, "updateAdapter(); Received Event Uid:  " + e.getUid() + "  Event_id: " + e.getEvent_id());
-        }
-
-        eventItemArrayList = (ArrayList<EventItem>)itemsForAdapter;
     }
 
 

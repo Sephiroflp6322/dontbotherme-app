@@ -29,17 +29,23 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventItemAdapter.Exam
     }
 
     public static class ExampleViewHolder extends RecyclerView.ViewHolder{
-        //public ImageView mImageView;
+        private ImageView mImageView;
+        private ImageView mDeleteImage;
         private TextView textViewTitle;
         private TextView textViewAddress;
         private TextView textViewDescription;
+        private TextView textViewStartTs;
 
         public ExampleViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
-            //mImageView = itemView.findViewById(R.id.imageView);
-            textViewTitle = itemView.findViewById(R.id.text_view_title);
-            textViewAddress = itemView.findViewById(R.id.text_view_address);
-            textViewDescription = itemView.findViewById(R.id.text_viw_description);
+            mImageView = itemView.findViewById(R.id.subscribe_icon);
+            mDeleteImage = itemView.findViewById(R.id.subscribe_delete);
+            textViewTitle = itemView.findViewById(R.id.subscribe_title);
+            textViewAddress = itemView.findViewById(R.id.subscribe_address);
+            textViewDescription = itemView.findViewById(R.id.subscribe_description);
+            textViewStartTs = itemView.findViewById(R.id.subscribe_startTs);
+
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -53,7 +59,7 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventItemAdapter.Exam
                 }
             });
 
-            /*mDeleteImage.setOnClickListener(new View.OnClickListener() {
+            mDeleteImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if(listener != null){
@@ -63,7 +69,7 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventItemAdapter.Exam
                         }
                     }
                 }
-            });*/
+            });
         }
     }
 
@@ -75,18 +81,19 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventItemAdapter.Exam
 
     @Override
     public ExampleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.subscribe_event_item, parent, false);
         ExampleViewHolder evh = new ExampleViewHolder(v, mListener);
         return evh;
     }
 
     @Override
     public void onBindViewHolder(ExampleViewHolder holder, int position) {
-        //holder.mImageView.setImageResource(currentItem.getmImageResource());
         EventItem currentItem = eventItemList.get(position);
+        holder.mImageView.setImageResource(currentItem.getmImageResource());
         holder.textViewTitle.setText(currentItem.getEvent().getEvent_title());
         holder.textViewDescription.setText(currentItem.getEvent().getDescription());
         holder.textViewAddress.setText(currentItem.getEvent().getAddress());
+        holder.textViewStartTs.setText(currentItem.getEvent().getStart_ts());
     }
 
     @Override
