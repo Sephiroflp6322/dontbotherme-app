@@ -17,10 +17,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity
-            android:name=".SendEventActivity"
-            android:label="SEND">
-        </activity>
 
         <activity
             android:name=".LocalEventActivity"
@@ -29,6 +25,19 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name=".SendEventActivity"
+            android:label="SEND"
+            android:parentActivityName=".LocalEventActivity">
+        </activity>
+
+        <activity
+            android:name=".SubscribeEventActivity"
+            android:label="SUBSCRIBE"
+            android:parentActivityName=".SendEventActivity">
         </activity>
 
         <activity android:name=".ScanCodeActivity" />

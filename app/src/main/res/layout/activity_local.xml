@@ -39,7 +39,7 @@
 
 
     <android.support.design.widget.BottomNavigationView
-        android:id="@+id/sender_activity_navigation"
+        android:id="@+id/local_activity_navigation"
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginEnd="0dp"

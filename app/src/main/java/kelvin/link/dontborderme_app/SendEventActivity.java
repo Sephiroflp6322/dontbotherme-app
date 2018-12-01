@@ -22,14 +22,16 @@ public class SendEventActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    Intent sender_intent = new Intent(SendEventActivity.this, LocalEventActivity.class);
-                    startActivity(sender_intent);
+                    Intent main_intent = new Intent(SendEventActivity.this, LocalEventActivity.class);
+                    startActivity(main_intent);
                     return true;
                 case R.id.navigation_sender:
                     //Intent main_intent = new Intent(SendEventActivity.this, SendEventActivity.class);
                     //startActivity(main_intent);
                     return true;
                 case R.id.navigation_subscriber:
+                    Intent subscriber_intent = new Intent(SendEventActivity.this, SubscribeEventActivity.class);
+                    startActivity(subscriber_intent);
                     return true;
             }
             return false;
@@ -41,7 +43,7 @@ public class SendEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_event);
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.main_activity_navigation);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.send_activity_navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_sender);
 

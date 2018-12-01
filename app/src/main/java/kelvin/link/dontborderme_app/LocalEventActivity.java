@@ -38,10 +38,12 @@ public class LocalEventActivity extends AppCompatActivity{
                     //startActivity(sender_intent);
                     return true;
                 case R.id.navigation_sender:
-                    Intent main_intent = new Intent(LocalEventActivity.this, SendEventActivity.class);
-                    startActivity(main_intent);
+                    Intent sender_intent = new Intent(LocalEventActivity.this, SendEventActivity.class);
+                    startActivity(sender_intent);
                     return true;
                 case R.id.navigation_subscriber:
+                    Intent subscriber_intent = new Intent(LocalEventActivity.this, SubscribeEventActivity.class);
+                    startActivity(subscriber_intent);
                     return true;
             }
             return false;
@@ -53,7 +55,7 @@ public class LocalEventActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_local);
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.sender_activity_navigation);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.local_activity_navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_home);
 
