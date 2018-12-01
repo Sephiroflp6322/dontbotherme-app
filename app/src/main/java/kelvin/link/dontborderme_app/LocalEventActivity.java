@@ -64,7 +64,7 @@ public class LocalEventActivity extends AppCompatActivity{
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
-        final EventAdapter adapter = new EventAdapter();
+        final EventRoomAdapter adapter = new EventRoomAdapter();
         recyclerView.setAdapter(adapter);
 
         eventRoomViewModel = ViewModelProviders.of(this).get(EventRoomViewModel.class);
@@ -108,7 +108,7 @@ public class LocalEventActivity extends AppCompatActivity{
 
 
         //For Update
-        adapter.setOnItemClickListener(new EventAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new EventRoomAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(EventRoom event) {
                 Intent intent = new Intent(LocalEventActivity.this, AddEditEventActivity.class);
