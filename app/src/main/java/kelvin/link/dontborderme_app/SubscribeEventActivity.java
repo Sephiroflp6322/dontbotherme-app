@@ -36,6 +36,7 @@ public class SubscribeEventActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
 
     private DontBorderMeWebServiceAPI webServiceAPI;
+    private User user;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -70,7 +71,10 @@ public class SubscribeEventActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_subscriber);
 
+        //Setting up user info
+        user = UserManager.getInstance().getUser();
 
+        //Setting up retrofit connection
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://59.149.35.12/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -95,14 +99,13 @@ public class SubscribeEventActivity extends AppCompatActivity {
 
             @Override
             public void onDeleteClick(int position) {
+                Integer event_id = eventItemArrayList.get(position).getEvent().getEvent_id();
+                deleteEvent(user.getUid(), event_id);
                 removeItem(position);
             }
         });
 
-
-        String uid = UserManager.getInstance().getUser().getUid();
-
-        getAllUserEvents(uid);
+        getAllUserEvents(user.getUid());
 
 
     }
@@ -145,6 +148,31 @@ public class SubscribeEventActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Event>> call, Throwable t){
                 Log.i(logMessage, "getAllUserEvents(); Fialure message: " + t.getMessage());
+            }
+        });
+    }
+
+
+    //Arguments required: <uid>, <event_id>
+    private void deleteEvent(String uid, Integer event_id){
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put("uid", uid);
+        parameters.put("event_id", String.valueOf(event_id));
+        Call<Void> call = webServiceAPI.deleteEvent(parameters);
+
+        //Async call
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(!response.isSuccessful()){
+                    Log.i(logMessage, "_deleteEvent(); Response code:" + response.code());
+                    return;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t){
+                Log.i(logMessage, "_deleteEvent(); Fialure message: " + t.getMessage());
             }
         });
     }
