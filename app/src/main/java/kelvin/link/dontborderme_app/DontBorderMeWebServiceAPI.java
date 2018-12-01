@@ -10,8 +10,12 @@ import retrofit2.http.QueryMap;
 public interface DontBorderMeWebServiceAPI {
 
 
-    @GET("get_user_events.php")
-    Call<List<Event>> getUserEvents(
+    @GET("get_subscribe_events.php")
+    Call<List<Event>> getSubscribeEvents(
+            @QueryMap Map<String, String> parameters);
+
+    @GET("get_send_events.php")
+    Call<List<Event>> getSendEvents(
             @QueryMap Map<String, String> parameters);
 
     @GET("create_event.php")

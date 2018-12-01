@@ -116,7 +116,7 @@ public class SubscribeEventActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        getAllUserEvents(user.getUid());
+        getSubscribeEvents(user.getUid());
     }
 
     public void removeItem(int position){
@@ -129,23 +129,22 @@ public class SubscribeEventActivity extends AppCompatActivity {
         eventItemArrayList.clear();
         for(Event e: events){
             eventItemArrayList.add(new EventItem(R.drawable.ic_remind, e));
-            Log.i(logMessage, "description: " + e.getRole());
         }
     }
 
 
     //Arguments required: <uid>
-    private void getAllUserEvents(String uid){
+    private void getSubscribeEvents(String uid){
         Map<String, String> parameters = new HashMap<>();
         parameters.put("uid", uid);
-        Call<List<Event>> call = webServiceAPI.getUserEvents(parameters);
+        Call<List<Event>> call = webServiceAPI.getSubscribeEvents(parameters);
 
         //Async call
         call.enqueue(new Callback<List<Event>>() {
             @Override
             public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
                 if(!response.isSuccessful()){
-                    Log.i(logMessage, "getAllUserEvents(); Response code:" + response.code());
+                    Log.i(logMessage, "getSubscribeEvents(); Response code:" + response.code());
                     return;
                 }
                 updateAdapter(response.body());
@@ -154,7 +153,7 @@ public class SubscribeEventActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Event>> call, Throwable t){
-                Log.i(logMessage, "getAllUserEvents(); Fialure message: " + t.getMessage());
+                Log.i(logMessage, "getSubscribeEvents(); Fialure message: " + t.getMessage());
             }
         });
     }

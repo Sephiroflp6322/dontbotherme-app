@@ -36,7 +36,7 @@ public class WebServiceDAO {
 
     //Arguments required: <uid>
     public void fetchAllUserEvents(String uid) throws InterruptedException {
-        _getAllUserEvents(uid);
+        //_getAllUserEvents(uid);
     }
 
     public List<Event> getAllEvents(){
@@ -63,7 +63,7 @@ public class WebServiceDAO {
 
     //==========Workhorses==========
 
-    //Arguments required: <uid>
+    /*//Arguments required: <uid>
     private void _getAllUserEvents(String uid){
         Map<String, String> parameters = new HashMap<>();
         parameters.put("uid", uid);
@@ -93,7 +93,7 @@ public class WebServiceDAO {
                 //response.errorBody().string()
             }
         });
-    }
+    }*/
 
 
 
