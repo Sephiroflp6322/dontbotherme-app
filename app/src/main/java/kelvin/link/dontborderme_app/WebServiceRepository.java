@@ -1,8 +1,8 @@
 package kelvin.link.dontborderme_app;
 
-import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.util.List;
 import java.util.Map;
@@ -10,13 +10,17 @@ import java.util.Map;
 
 public class WebServiceRepository {
     private WebServiceDAO webServiceDAO;
-    private LiveData<List<Event>> allEvents;
+    private static List<Event> allEvents;
 
     public WebServiceRepository(WebServiceDAO webServiceDAO){
         this.webServiceDAO = webServiceDAO;
+        UserManager userManager = UserManager.getInstance();
+        String uid = userManager.getUser().getUid();
+        //Updating allEvents
+        new GetAllEventAsyncTask(webServiceDAO).execute(uid);
     }
 
-    public LiveData<List<Event>> getAllEvents(){
+    public List<Event> getAllEvents(){
         return allEvents;
     }
 
@@ -32,6 +36,35 @@ public class WebServiceRepository {
         new DeleteEventAsyncTask(webServiceDAO).execute(String.valueOf(event_id));
     }
 
+
+
+    //TODO Need to fix doInbackground and onpostexecute
+    private static class GetAllEventAsyncTask extends AsyncTask<String, Void, List<Event>> {
+        private WebServiceDAO webServiceDAO;
+
+        private GetAllEventAsyncTask(WebServiceDAO webServiceDAO){
+            this.webServiceDAO = webServiceDAO;
+        }
+
+        @Override
+        protected List<Event> doInBackground(String... params) {
+            String uid = params[0];
+            try {
+                webServiceDAO.fetchAllUserEvents(uid);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(List<Event> result) {
+            super.onPostExecute(result);
+            if(result != null){
+                allEvents = result;
+            }
+        }
+    }
 
 
     private static class InsertEventAsyncTask extends AsyncTask<Event, Void, Void> {

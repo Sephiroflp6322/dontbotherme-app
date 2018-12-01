@@ -10,7 +10,7 @@ import java.util.List;
 
 public class WebServiceViewModel extends AndroidViewModel {
     private WebServiceRepository repository;
-    private LiveData<List<Event>> allEvents;
+    private List<Event> allEvents;
 
     public WebServiceViewModel(@NonNull Application application) {
         super(application);
@@ -31,7 +31,7 @@ public class WebServiceViewModel extends AndroidViewModel {
         repository.delete(event_id);
     }
 
-    public LiveData<List<Event>> getAllEvents(){
+    public List<Event> getAllEvents(){
         return allEvents;
     }
 }

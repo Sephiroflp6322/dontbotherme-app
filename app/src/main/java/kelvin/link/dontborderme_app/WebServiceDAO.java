@@ -1,8 +1,10 @@
 package kelvin.link.dontborderme_app;
 
 
+import android.arch.lifecycle.LiveData;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class WebServiceDAO {
     private String logMessage = "WebServiceDAO:";
     private DontBorderMeWebServiceAPI webServiceAPI;
-    private List<Event> cachedEvents;
+    private List<Event> cachedEvents = new ArrayList<>();
 
 
     public WebServiceDAO() {
@@ -33,8 +35,11 @@ public class WebServiceDAO {
     //==========APIs==========
 
     //Arguments required: <uid>
-    public List<Event> getAllUserEvents(String uid) throws InterruptedException {
+    public void fetchAllUserEvents(String uid) throws InterruptedException {
         _getAllUserEvents(uid);
+    }
+
+    public List<Event> getAllEvents(){
         return cachedEvents;
     }
 
@@ -72,10 +77,11 @@ public class WebServiceDAO {
                     Log.i(logMessage, "_getAllUserEvents(); Response code:" + response.code());
                     return;
                 }
+
                 cachedEvents = response.body();
 
                 //For debug
-                List<Event> result = response.body();
+                List<Event> result = cachedEvents;
                 for(Event e: result){
                     Log.i(logMessage, "_getAllUserEvents(); Received Event Uid:  " + e.getUid() + "  Event_id: " + e.getEvent_id());
                 }

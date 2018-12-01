@@ -62,7 +62,7 @@ public class LocalEventActivity extends AppCompatActivity{
 
 
         //Configurating Recyclerview
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.local_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
@@ -73,7 +73,6 @@ public class LocalEventActivity extends AppCompatActivity{
         eventRoomViewModel.getAllEvents().observe(this, new Observer<List<EventRoom>>() {
             @Override
             public void onChanged(@Nullable List<EventRoom> eventRooms) {
-                //Initialize RecyclerView
                 adapter.setEvents(eventRooms);
             }
         });

@@ -8,9 +8,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class EventItemAdapter extends RecyclerView.Adapter<EventItemAdapter.ExampleViewHolder> {
-    private ArrayList<EventItem> eventItemList = new ArrayList<>();
+    private List<EventItem> eventItemList = new ArrayList<>();
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener{
@@ -20,6 +21,11 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventItemAdapter.Exam
 
     public void setOnItemClickListener(OnItemClickListener listener){
         mListener = listener;
+    }
+
+    public void setEventItems(List<EventItem> eventItems){
+        this.eventItemList = eventItems;
+        notifyDataSetChanged();
     }
 
     public static class ExampleViewHolder extends RecyclerView.ViewHolder{

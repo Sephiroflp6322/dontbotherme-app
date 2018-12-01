@@ -14,7 +14,6 @@ public interface DontBorderMeWebServiceAPI {
     Call<List<Event>> getUserEvents(
             @QueryMap Map<String, String> parameters);
 
-
     @GET("create_event.php")
     Call<Void> createEvent(
             @QueryMap Map<String, String> parameters);
