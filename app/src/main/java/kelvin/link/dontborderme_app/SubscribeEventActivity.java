@@ -106,6 +106,11 @@ public class SubscribeEventActivity extends AppCompatActivity {
                 deleteEvent(user.getUid(), event_id);
                 removeItem(position);
             }
+
+            @Override
+            public void onIconClick(int position) {
+                //Do nothing
+            }
         });
 
 

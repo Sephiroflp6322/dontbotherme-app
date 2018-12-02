@@ -96,7 +96,15 @@ public class SendEventActivity extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new EventItemAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                //TODO Set onclick event
+                Event event = eventItemArrayList.get(position).getEvent();
+                Intent intent = new Intent(SendEventActivity.this, SendAddEditEventActivity.class);
+                intent.putExtra(SendAddEditEventActivity.EXTRA_EVENT_ID, event.getEvent_id());
+                intent.putExtra(SendAddEditEventActivity.EXTRA_EVENT_TITLE, event.getEvent_title());
+                intent.putExtra(SendAddEditEventActivity.EXTRA_ADDRESS, event.getAddress());
+                intent.putExtra(SendAddEditEventActivity.EXTRA_DESCRIPTION, event.getDescription());
+                intent.putExtra(SendAddEditEventActivity.EXTRA_START_TS, event.getStart_ts());
+
+                startActivityForResult(intent, EDIT_EVENT_REQUEST);
             }
 
             @Override
@@ -106,6 +114,16 @@ public class SendEventActivity extends AppCompatActivity {
                 webServiceDAO.deleteEvent(user.getUid(), event_id);
                 removeItem(position);
                 Toast.makeText(SendEventActivity.this, "Event deleted", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onIconClick(int position) {
+                Integer event_id = eventItemArrayList.get(position).getEvent().getEvent_id();
+                Bundle bundle = new Bundle();
+                bundle.putString("msg", user.getUid() + " " + String.valueOf(event_id));
+                QrCodeDialog qrCodeDialog = new QrCodeDialog();
+                qrCodeDialog.setArguments(bundle);
+                qrCodeDialog.show(getSupportFragmentManager(), "QR Dialog");
             }
         });
 

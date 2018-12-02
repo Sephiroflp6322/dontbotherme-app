@@ -5,6 +5,7 @@ import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
 public interface DontBorderMeWebServiceAPI {
@@ -20,6 +21,10 @@ public interface DontBorderMeWebServiceAPI {
 
     @GET("create_event.php")
     Call<Void> createEvent(
+            @QueryMap Map<String, String> parameters);
+
+    @GET("update_event.php")
+    Call<Void> updateEvent(
             @QueryMap Map<String, String> parameters);
 
     @GET("del_user_event.php")

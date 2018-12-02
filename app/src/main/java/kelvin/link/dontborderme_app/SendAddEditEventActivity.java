@@ -37,10 +37,9 @@ public class SendAddEditEventActivity extends AppCompatActivity implements DateP
     private EditText editTextTitle;
     private EditText editTextAddress;
     private EditText editTextDescription;
-    private String start_ts = new String();
+    private EditText editTextDateTime;
 
     private Calendar calendar;
-    private TextView textViewDateTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +50,7 @@ public class SendAddEditEventActivity extends AppCompatActivity implements DateP
         editTextTitle = findViewById(R.id.send_edit_text_title);
         editTextAddress = findViewById(R.id.send_edit_text_address);
         editTextDescription = findViewById(R.id.send_edit_text_description);
-        textViewDateTime = (TextView)findViewById(R.id.send_textView_DateTime);
+        editTextDateTime = findViewById(R.id.send_edit_text_DateTime);
 
         calendar = Calendar.getInstance();
 
@@ -64,7 +63,7 @@ public class SendAddEditEventActivity extends AppCompatActivity implements DateP
             editTextTitle.setText(intent.getStringExtra(EXTRA_EVENT_TITLE));
             editTextAddress.setText(intent.getStringExtra(EXTRA_ADDRESS));
             editTextDescription.setText(intent.getStringExtra(EXTRA_DESCRIPTION));
-            textViewDateTime.setText(intent.getStringExtra(EXTRA_START_TS));
+            editTextDateTime.setText(intent.getStringExtra(EXTRA_START_TS));
         }else{
             setTitle("Add Event");
         }
@@ -97,6 +96,7 @@ public class SendAddEditEventActivity extends AppCompatActivity implements DateP
         String title = editTextTitle.getText().toString();
         String address = editTextAddress.getText().toString();
         String description = editTextDescription.getText().toString();
+        String start_ts = editTextDateTime.getText().toString();
 
         if(title.trim().isEmpty()){
             Toast.makeText(this, "Please insert a title", Toast.LENGTH_SHORT).show();
@@ -119,17 +119,39 @@ public class SendAddEditEventActivity extends AppCompatActivity implements DateP
             params.put("start_ts", start_ts);
 
             //For debug
-            Log.i(logMessage, "uid:" + user.getUid());
-            Log.i(logMessage, "event_title:" + title);
-            Log.i(logMessage, "address:" + address);
-            Log.i(logMessage, "description:" + description);
-            Log.i(logMessage, "start_ts:" + start_ts);
-            Log.i(logMessage, "role:" + "s");
+            Log.i(logMessage, "Insert uid:" + user.getUid());
+            Log.i(logMessage, "Insert event_title:" + title);
+            Log.i(logMessage, "Insert address:" + address);
+            Log.i(logMessage, "Insert description:" + description);
+            Log.i(logMessage, "Insert start_ts:" + start_ts);
+            Log.i(logMessage, "Insert role:" + "s");
 
             webServiceDAO.createEvent(params);
-            Toast.makeText(this, "Event saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Event Saved", Toast.LENGTH_SHORT).show();
         }else{
             //Update existing event
+            WebServiceDAO webServiceDAO = new WebServiceDAO();
+
+            Map<String, String> params = new HashMap<>();
+            params.put("uid", user.getUid());
+            params.put("event_id", String.valueOf(event_id));
+            params.put("event_title", title);
+            params.put("address", address);
+            params.put("description", description);
+            params.put("role", "s");
+            params.put("start_ts", start_ts);
+
+            //For debug
+            Log.i(logMessage, "Update uid:" + user.getUid());
+            Log.i(logMessage, "Update event_id:" + event_id);
+            Log.i(logMessage, "Update event_title:" + title);
+            Log.i(logMessage, "Update address:" + address);
+            Log.i(logMessage, "Update description:" + description);
+            Log.i(logMessage, "Update start_ts:" + start_ts);
+            Log.i(logMessage, "Update role:" + "s");
+
+            webServiceDAO.updateEvent(params);
+            Toast.makeText(this, "Event Updated", Toast.LENGTH_SHORT).show();
         }
 
         finish();
@@ -162,8 +184,8 @@ public class SendAddEditEventActivity extends AppCompatActivity implements DateP
         calendar.set(Calendar.YEAR, i-1900);
         calendar.set(Calendar.MONTH, i1);
         calendar.set(Calendar.DAY_OF_MONTH, i2);
-        start_ts = String.valueOf(i) + "-" + String.valueOf(i1+1)+ "-" + String.valueOf(i2);
-        textViewDateTime.setText(start_ts);
+        String dateTime = String.valueOf(i) + "-" + String.valueOf(i1+1)+ "-" + String.valueOf(i2);
+        editTextDateTime.setText(dateTime);
         //start_ts = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
     }
 
@@ -173,7 +195,7 @@ public class SendAddEditEventActivity extends AppCompatActivity implements DateP
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-        start_ts = new Timestamp(year, month, day, i, i1, 0, 0).toString().substring(0, 19);
-        textViewDateTime.setText(start_ts);
+        String dateTime = new Timestamp(year, month, day, i, i1, 0, 0).toString().substring(0, 19);
+        editTextDateTime.setText(dateTime);
     }
 }

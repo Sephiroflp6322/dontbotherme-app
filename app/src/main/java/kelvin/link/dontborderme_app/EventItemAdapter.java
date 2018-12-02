@@ -17,6 +17,7 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventItemAdapter.Exam
     public interface OnItemClickListener{
         void onItemClick(int position);
         void onDeleteClick(int position);
+        void onIconClick(int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener){
@@ -70,6 +71,20 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventItemAdapter.Exam
                     }
                 }
             });
+
+
+            mImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(listener != null){
+                        int postion = getAdapterPosition();
+                        if(postion != RecyclerView.NO_POSITION){
+                            listener.onIconClick(postion);
+                        }
+                    }
+                }
+            });
+
         }
     }
 

@@ -48,6 +48,11 @@ public class WebServiceDAO {
         _createEvent(parameters);
     }
 
+    //Arguments required: <All fields of an event>
+    public void updateEvent(Map<String, String> parameters){
+        _updateEvent(parameters);
+    }
+
     //Arguments required: <uid>, <event_id>
     public void deleteEvent(String uid, Integer event_id){
         _deleteEvent(uid, event_id);
@@ -120,6 +125,30 @@ public class WebServiceDAO {
     }
 
 
+
+    //Arguments required: <All fields of an event>
+    private void _updateEvent(Map<String, String> parameters){
+        Call<Void> call = webServiceAPI.updateEvent(parameters);
+
+        //Async call
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(!response.isSuccessful()){
+                    Log.i(logMessage, "_updateEvent(); Response code:" + response.code());
+                    return;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t){
+                Log.i(logMessage, "_updateEvent(); Fialure message: " + t.getMessage());
+                //response.errorBody().string()
+            }
+        });
+    }
+
+
     //Arguments required: <uid>, <event_id>
     private void _deleteEvent(String uid, Integer event_id){
         Map<String, String> parameters = new HashMap<>();
@@ -144,6 +173,8 @@ public class WebServiceDAO {
             }
         });
     }
+
+
 
 
     //Arguments required: <uid>, <event_id>
