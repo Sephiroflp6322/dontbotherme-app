@@ -38,14 +38,16 @@
             android:inputType="textMultiLine"
             android:layout_marginBottom="10dp"/>
 
-        <TextView
+
+        <EditText
             android:id="@+id/textView_DateTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=" Date and Time"
-            android:layout_marginTop="10dp"
+            android:hint=" Date and Time"
             android:layout_marginBottom="20dp"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            android:inputType="datetime"/>
+
 
         <Button
             android:id="@+id/btn_date_picker"

@@ -96,6 +96,7 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventItemAdapter.Exam
 
     @Override
     public ExampleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        //TODO EventItemAdapter always use subscribe_event_item as inflate layout, fix it later
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.subscribe_event_item, parent, false);
         ExampleViewHolder evh = new ExampleViewHolder(v, mListener);
         return evh;

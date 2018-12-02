@@ -32,6 +32,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SubscribeEventActivity extends AppCompatActivity {
+    private static final String TIMESTAMP_ZERO = "0000-00-00 00:00:00";
     private String logMessage = "SubscribeActivity:";
     private ArrayList<EventItem> eventItemArrayList = new ArrayList<>();
     private RecyclerView mRecyclerView;
@@ -137,6 +138,9 @@ public class SubscribeEventActivity extends AppCompatActivity {
     private void updateAdapter(List<Event> events){
         eventItemArrayList.clear();
         for(Event e: events){
+            if(e.getStart_ts() != null && e.getStart_ts().equals(TIMESTAMP_ZERO)){
+                e.setStart_ts(null);
+            }
             eventItemArrayList.add(new EventItem(R.drawable.ic_remind, e));
         }
     }

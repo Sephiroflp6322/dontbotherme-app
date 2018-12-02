@@ -44,7 +44,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Date and Time"
-            android:inputType="textMultiLine"
             android:layout_marginBottom="20dp"/>
 
 

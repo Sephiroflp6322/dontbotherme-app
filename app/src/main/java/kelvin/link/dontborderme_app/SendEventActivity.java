@@ -29,6 +29,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SendEventActivity extends AppCompatActivity {
+    private static final String TIMESTAMP_ZERO = "0000-00-00 00:00:00";
     private String logMessage = "ScanCodeActivity";
     public static final int ADD_EVENT_REQUEST = 1;
     public static final int EDIT_EVENT_REQUEST = 2;
@@ -138,6 +139,9 @@ public class SendEventActivity extends AppCompatActivity {
     private void updateAdapter(List<Event> events){
         eventItemArrayList.clear();
         for(Event e: events){
+            if(e.getStart_ts() != null && e.getStart_ts().equals(TIMESTAMP_ZERO)){
+                e.setStart_ts(null);
+            }
             eventItemArrayList.add(new EventItem(R.drawable.ic_remind, e));
             Log.i(logMessage, "Description:"+ e.getDescription());
         }
