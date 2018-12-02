@@ -16,4 +16,8 @@
         android:icon="@drawable/ic_subscribe"
         android:title="@string/title_subscribe" />
 
+    <item
+        android:id="@+id/navigation_me"
+        android:icon="@drawable/ic_me"
+        android:title="@string/title_me" />
 </menu>

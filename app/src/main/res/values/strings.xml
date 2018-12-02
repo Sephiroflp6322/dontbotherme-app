@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">DONT BOTHER Me</string>
-    <string name="title_home">LOCAL</string>
-    <string name="title_send">SEND</string>
-    <string name="title_subscribe">SUBSCRIBE</string>
+    <string name="app_name">Dont bother me</string>
+    <string name="title_home">Local</string>
+    <string name="title_send">Send</string>
+    <string name="title_subscribe">Suscribe</string>
+    <string name="title_me">Me</string>
 </resources>

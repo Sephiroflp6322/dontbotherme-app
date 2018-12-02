@@ -4,6 +4,7 @@
     <item
         android:id="@+id/delete_all_events"
         android:title="Delete all events"
-        app:showAsAction="never"/>
+        android:icon="@drawable/ic_add"
+        app:showAsAction="ifRoom"/>
 
 </menu>
