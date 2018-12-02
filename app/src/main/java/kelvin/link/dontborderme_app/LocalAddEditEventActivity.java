@@ -39,7 +39,7 @@ public class LocalAddEditEventActivity extends AppCompatActivity implements Date
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_edit);
+        setContentView(R.layout.activity_local_add_edit);
 
         editTextTitle = findViewById(R.id.edit_text_title);
         editTextAddress = findViewById(R.id.edit_text_address);

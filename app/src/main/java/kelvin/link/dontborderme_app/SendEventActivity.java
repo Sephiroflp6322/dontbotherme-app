@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,9 +29,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SendEventActivity extends AppCompatActivity {
     private String logMessage = "ScanCodeActivity";
+    public static final int ADD_EVENT_REQUEST = 1;
+    public static final int EDIT_EVENT_REQUEST = 2;
+
     private DontBorderMeWebServiceAPI webServiceAPI;
     private User user;
-
 
     private ArrayList<EventItem> eventItemArrayList = new ArrayList<>();
     private RecyclerView mRecyclerView;
@@ -99,8 +102,10 @@ public class SendEventActivity extends AppCompatActivity {
             @Override
             public void onDeleteClick(int position) {
                 Integer event_id = eventItemArrayList.get(position).getEvent().getEvent_id();
-                //deleteEvent(user.getUid(), event_id);
-                //removeItem(position);
+                WebServiceDAO webServiceDAO = new WebServiceDAO();
+                webServiceDAO.deleteEvent(user.getUid(), event_id);
+                removeItem(position);
+                Toast.makeText(SendEventActivity.this, "Event deleted", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -122,11 +127,12 @@ public class SendEventActivity extends AppCompatActivity {
         getSendEvents(user.getUid());
     }
 
+
+
     public void removeItem(int position){
         eventItemArrayList.remove(position);
         mAdapter.notifyItemRemoved(position);
     }
-
 
 
     //Arguments required: <uid>
@@ -167,7 +173,8 @@ public class SendEventActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.sender_add_event:
-                startActivity(new Intent(getApplicationContext(), ScanCodeActivity.class));
+                Intent intent = new Intent(SendEventActivity.this, SendAddEditEventActivity.class);
+                startActivityForResult(intent, ADD_EVENT_REQUEST);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

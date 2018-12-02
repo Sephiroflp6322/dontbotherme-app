@@ -47,6 +47,11 @@
             android:parentActivityName=".LocalEventActivity">
         </activity>
 
+        <activity
+            android:name=".SendAddEditEventActivity"
+            android:parentActivityName=".SendEventActivity">
+        </activity>
+
 
     </application>
 

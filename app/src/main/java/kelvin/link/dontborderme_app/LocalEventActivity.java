@@ -139,7 +139,6 @@ public class LocalEventActivity extends AppCompatActivity{
             String description = data.getStringExtra(LocalAddEditEventActivity.EXTRA_DESCRIPTION);
             String start_ts = data.getStringExtra(LocalAddEditEventActivity.EXTRA_START_TS);
 
-
             //TODO event_id should be compatible with server
             //String uid = userManager.getUser().getUid();
             EventRoom event = new EventRoom(null , event_title, address,description, "s",start_ts);
@@ -165,8 +164,7 @@ public class LocalEventActivity extends AppCompatActivity{
             eventRoomViewModel.update(eventRoom);
 
             Toast.makeText(this, "Event updated", Toast.LENGTH_SHORT).show();
-        }
-        else{
+        }else{
             Toast.makeText(this, "Fail to save", Toast.LENGTH_SHORT).show();
         }
     }

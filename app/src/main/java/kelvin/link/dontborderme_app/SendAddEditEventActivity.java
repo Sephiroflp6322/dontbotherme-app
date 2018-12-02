@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,20 +19,25 @@ import android.widget.Toast;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SendAddEditEventActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
+    private String logMessage = "SendAddEditEventActivity";
     public static final String EXTRA_EVENT_ID= "EXTRA_EVENT_ID";
     public static final String EXTRA_EVENT_TITLE= "EXTRA_EVENT_TITLE";
     public static final String EXTRA_ADDRESS = "EXTRA_ADDRESS";
     public static final String EXTRA_DESCRIPTION = "EXTRA_DESCRIPTION";
     public static final String EXTRA_START_TS= "EXTRA_START_TS";
 
-
-
     private EditText editTextTitle;
     private EditText editTextAddress;
     private EditText editTextDescription;
-    private String start_ts;
+    private String start_ts = new String();
 
     private Calendar calendar;
     private TextView textViewDateTime;
@@ -39,12 +45,13 @@ public class SendAddEditEventActivity extends AppCompatActivity implements DateP
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_edit);
+        setContentView(R.layout.activity_send_add_edit);
 
-        editTextTitle = findViewById(R.id.edit_text_title);
-        editTextAddress = findViewById(R.id.edit_text_address);
-        editTextDescription = findViewById(R.id.edit_text_description);
-        textViewDateTime = (TextView)findViewById(R.id.textView_DateTime);
+
+        editTextTitle = findViewById(R.id.send_edit_text_title);
+        editTextAddress = findViewById(R.id.send_edit_text_address);
+        editTextDescription = findViewById(R.id.send_edit_text_description);
+        textViewDateTime = (TextView)findViewById(R.id.send_textView_DateTime);
 
         calendar = Calendar.getInstance();
 
@@ -62,24 +69,23 @@ public class SendAddEditEventActivity extends AppCompatActivity implements DateP
             setTitle("Add Event");
         }
 
-
         //Date picker
-        Button DatePicker_Btn = (Button)findViewById(R.id.btn_date_picker);
+        Button DatePicker_Btn = (Button)findViewById(R.id.send_date_picker);
         DatePicker_Btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 DatePickerFragment datePicker = new DatePickerFragment();
-                datePicker.show(getSupportFragmentManager(), "" + "Date picker");
+                datePicker.show(getSupportFragmentManager(), "" + "Date Picker");
             }
         });
 
         //Time Picker
-        Button TimePicker_Btn = (Button)findViewById(R.id.btn_time_picker);
+        Button TimePicker_Btn = (Button)findViewById(R.id.send_time_picker);
         TimePicker_Btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 TimePickerFragment timePicker = new TimePickerFragment();
-                timePicker.show(getSupportFragmentManager(), "Time picker");
+                timePicker.show(getSupportFragmentManager(), "Time Picker");
             }
         });
 
@@ -87,6 +93,7 @@ public class SendAddEditEventActivity extends AppCompatActivity implements DateP
     }
 
     private void saveEvent(){
+        User user = UserManager.getInstance().getUser();
         String title = editTextTitle.getText().toString();
         String address = editTextAddress.getText().toString();
         String description = editTextDescription.getText().toString();
@@ -96,22 +103,39 @@ public class SendAddEditEventActivity extends AppCompatActivity implements DateP
             return;
         }
 
-        Intent data = new Intent();
-        data.putExtra(EXTRA_EVENT_TITLE, title);
-        data.putExtra(EXTRA_ADDRESS, address);
-        data.putExtra(EXTRA_DESCRIPTION, description);
-        data.putExtra(EXTRA_START_TS, start_ts);
-
         //Check whether EXTRA_EVENT_ID exist in Extra. If not, this is a new event.(event_id = -1)
         //Otherwise, this is an event that's already exist.
-        int event_id = getIntent().getIntExtra(EXTRA_EVENT_ID, -1);
-        if(event_id != -1){
-            data.putExtra(String.valueOf(EXTRA_EVENT_ID), event_id);
+        Integer event_id = getIntent().getIntExtra(EXTRA_EVENT_ID, -1);
+        if(event_id == -1){
+            //Create new event
+            WebServiceDAO webServiceDAO = new WebServiceDAO();
+
+            Map<String, String> params = new HashMap<>();
+            params.put("uid", user.getUid());
+            params.put("event_title", title);
+            params.put("address", address);
+            params.put("description", description);
+            params.put("role", "s");
+            params.put("start_ts", start_ts);
+
+            //For debug
+            Log.i(logMessage, "uid:" + user.getUid());
+            Log.i(logMessage, "event_title:" + title);
+            Log.i(logMessage, "address:" + address);
+            Log.i(logMessage, "description:" + description);
+            Log.i(logMessage, "start_ts:" + start_ts);
+            Log.i(logMessage, "role:" + "s");
+
+            webServiceDAO.createEvent(params);
+            Toast.makeText(this, "Event saved", Toast.LENGTH_SHORT).show();
+        }else{
+            //Update existing event
         }
 
-        setResult(RESULT_OK, data);
         finish();
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
