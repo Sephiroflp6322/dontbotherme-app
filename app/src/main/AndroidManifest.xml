@@ -20,7 +20,7 @@
 
         <activity
             android:name=".LocalEventActivity"
-            android:label="LOCAL">
+            android:label="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -30,13 +30,13 @@
 
         <activity
             android:name=".SendEventActivity"
-            android:label="SEND"
+            android:label=""
             android:parentActivityName=".LocalEventActivity">
         </activity>
 
         <activity
             android:name=".SubscribeEventActivity"
-            android:label="SUBSCRIBE"
+            android:label=""
             android:parentActivityName=".SendEventActivity">
         </activity>
 
