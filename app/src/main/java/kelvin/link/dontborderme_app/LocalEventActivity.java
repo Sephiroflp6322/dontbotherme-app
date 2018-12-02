@@ -3,11 +3,13 @@ package kelvin.link.dontborderme_app;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import java.util.List;
 
@@ -59,10 +62,10 @@ public class LocalEventActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_local);
 
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.local_activity_navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_home);
-
 
 
         //Configurating Recyclerview
@@ -184,7 +187,7 @@ public class LocalEventActivity extends AppCompatActivity{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.delete_all_events:
+            case R.id.local_delete_all_events:
                 eventRoomViewModel.deleteAllEvents();
                 Toast.makeText(this, "All Events Deleted", Toast.LENGTH_SHORT).show();
                 return true;

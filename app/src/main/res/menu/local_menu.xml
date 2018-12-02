@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
-        android:id="@+id/delete_all_events"
-        android:title="Delete all events"
-        android:icon="@drawable/ic_add"
-        app:showAsAction="ifRoom"/>
+        android:id="@+id/local_change_set"
+        android:title="Change Set"
+        android:icon="@drawable/ic_add" />
+
+    <item
+        android:id="@+id/local_delete_all_events"
+        android:title="Delete All" />
 
 </menu>
