@@ -50,7 +50,7 @@
         </activity>
         <activity
             android:name=".MeActivity"
-            android:label="@string/title_activity_me"
+            android:label=""
             android:parentActivityName=".SubscribeEventActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

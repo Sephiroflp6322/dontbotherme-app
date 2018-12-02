@@ -53,11 +53,7 @@ public class ScanCodeActivity extends AppCompatActivity implements ZXingScannerV
         String[] splitStr = text.trim().split("\\s+");
         String uid = splitStr[0];
         Integer event_id = Integer.parseInt(splitStr[1]);
-
-
         Log.i(logMessage, "uid: " + uid + "    event_id: " + String.valueOf(event_id));
-
-
         subscribeEvent(uid, event_id);
         onBackPressed();
     }
