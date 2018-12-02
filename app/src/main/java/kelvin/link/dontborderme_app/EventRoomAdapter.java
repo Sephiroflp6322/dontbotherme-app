@@ -26,8 +26,9 @@ public class EventRoomAdapter extends RecyclerView.Adapter<EventRoomAdapter.Even
     public void onBindViewHolder(@NonNull EventHolder holder, int position) {
         EventRoom currentEvent = events.get(position);
         holder.textViewTitle.setText(currentEvent.getEvent_title());
-        holder.textViewDescription.setText(currentEvent.getDescription());
         holder.textViewAddress.setText(currentEvent.getAddress());
+        holder.textViewDescription.setText(currentEvent.getDescription());
+        holder.textViewStartTs.setText(currentEvent.getStart_ts());
     }
 
     @Override
@@ -50,6 +51,7 @@ public class EventRoomAdapter extends RecyclerView.Adapter<EventRoomAdapter.Even
         private TextView textViewTitle;
         private TextView textViewAddress;
         private TextView textViewDescription;
+        private TextView textViewStartTs;
 
 
         public EventHolder(View itemView) {
@@ -57,6 +59,7 @@ public class EventRoomAdapter extends RecyclerView.Adapter<EventRoomAdapter.Even
             textViewTitle = itemView.findViewById(R.id.text_view_title);
             textViewAddress = itemView.findViewById(R.id.text_view_address);
             textViewDescription = itemView.findViewById(R.id.text_viw_description);
+            textViewStartTs = itemView.findViewById(R.id.text_view_startTs);
 
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
