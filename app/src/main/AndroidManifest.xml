@@ -43,7 +43,7 @@
         <activity android:name=".ScanCodeActivity" />
 
         <activity
-            android:name=".AddEditEventActivity"
+            android:name=".LocalAddEditEventActivity"
             android:parentActivityName=".LocalEventActivity">
         </activity>
 

@@ -19,7 +19,7 @@ import android.widget.Toast;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
-public class AddEditEventActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
+public class SendAddEditEventActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
     public static final String EXTRA_EVENT_ID= "EXTRA_EVENT_ID";
     public static final String EXTRA_EVENT_TITLE= "EXTRA_EVENT_TITLE";
     public static final String EXTRA_ADDRESS = "EXTRA_ADDRESS";
@@ -138,7 +138,7 @@ public class AddEditEventActivity extends AppCompatActivity implements DatePicke
         calendar.set(Calendar.YEAR, i-1900);
         calendar.set(Calendar.MONTH, i1);
         calendar.set(Calendar.DAY_OF_MONTH, i2);
-        start_ts = String.valueOf(i) + "-" + String.valueOf(i1)+ "-" + String.valueOf(i2);
+        start_ts = String.valueOf(i) + "-" + String.valueOf(i1+1)+ "-" + String.valueOf(i2);
         textViewDateTime.setText(start_ts);
         //start_ts = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
     }

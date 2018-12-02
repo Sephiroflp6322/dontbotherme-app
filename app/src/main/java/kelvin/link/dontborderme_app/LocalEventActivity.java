@@ -83,7 +83,7 @@ public class LocalEventActivity extends AppCompatActivity{
         buttonAddNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LocalEventActivity.this, AddEditEventActivity.class);
+                Intent intent = new Intent(LocalEventActivity.this, LocalAddEditEventActivity.class);
                 startActivityForResult(intent, ADD_EVENT_REQUEST);
             }
         });
@@ -112,12 +112,12 @@ public class LocalEventActivity extends AppCompatActivity{
         adapter.setOnItemClickListener(new EventRoomAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(EventRoom event) {
-                Intent intent = new Intent(LocalEventActivity.this, AddEditEventActivity.class);
-                intent.putExtra(AddEditEventActivity.EXTRA_EVENT_ID, event.getEvent_id());
-                intent.putExtra(AddEditEventActivity.EXTRA_EVENT_TITLE, event.getEvent_title());
-                intent.putExtra(AddEditEventActivity.EXTRA_ADDRESS, event.getAddress());
-                intent.putExtra(AddEditEventActivity.EXTRA_DESCRIPTION, event.getDescription());
-                intent.putExtra(AddEditEventActivity.EXTRA_START_TS, event.getStart_ts());
+                Intent intent = new Intent(LocalEventActivity.this, LocalAddEditEventActivity.class);
+                intent.putExtra(LocalAddEditEventActivity.EXTRA_EVENT_ID, event.getEvent_id());
+                intent.putExtra(LocalAddEditEventActivity.EXTRA_EVENT_TITLE, event.getEvent_title());
+                intent.putExtra(LocalAddEditEventActivity.EXTRA_ADDRESS, event.getAddress());
+                intent.putExtra(LocalAddEditEventActivity.EXTRA_DESCRIPTION, event.getDescription());
+                intent.putExtra(LocalAddEditEventActivity.EXTRA_START_TS, event.getStart_ts());
 
                 startActivityForResult(intent, EDIT_EVENT_REQUEST);
             }
@@ -134,10 +134,10 @@ public class LocalEventActivity extends AppCompatActivity{
         //Insert a new event or update an existing event
         if(requestCode == ADD_EVENT_REQUEST && resultCode == RESULT_OK){
 
-            String event_title = data.getStringExtra(AddEditEventActivity.EXTRA_EVENT_TITLE);
-            String address = data.getStringExtra(AddEditEventActivity.EXTRA_ADDRESS);
-            String description = data.getStringExtra(AddEditEventActivity.EXTRA_DESCRIPTION);
-            String start_ts = data.getStringExtra(AddEditEventActivity.EXTRA_START_TS);
+            String event_title = data.getStringExtra(LocalAddEditEventActivity.EXTRA_EVENT_TITLE);
+            String address = data.getStringExtra(LocalAddEditEventActivity.EXTRA_ADDRESS);
+            String description = data.getStringExtra(LocalAddEditEventActivity.EXTRA_DESCRIPTION);
+            String start_ts = data.getStringExtra(LocalAddEditEventActivity.EXTRA_START_TS);
 
 
             //TODO event_id should be compatible with server
@@ -148,16 +148,16 @@ public class LocalEventActivity extends AppCompatActivity{
             Toast.makeText(this, "Event saved", Toast.LENGTH_SHORT).show();
 
         }else if(requestCode == EDIT_EVENT_REQUEST && resultCode == RESULT_OK){
-            Integer event_id = data.getIntExtra(AddEditEventActivity.EXTRA_EVENT_ID, -1);
+            Integer event_id = data.getIntExtra(LocalAddEditEventActivity.EXTRA_EVENT_ID, -1);
             if(event_id == -1){
                 Toast.makeText(this, "Event can't be updated", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            String event_title = data.getStringExtra(AddEditEventActivity.EXTRA_EVENT_TITLE);
-            String address = data.getStringExtra(AddEditEventActivity.EXTRA_ADDRESS);
-            String description = data.getStringExtra(AddEditEventActivity.EXTRA_DESCRIPTION);
-            String start_ts = data.getStringExtra(AddEditEventActivity.EXTRA_START_TS);
+            String event_title = data.getStringExtra(LocalAddEditEventActivity.EXTRA_EVENT_TITLE);
+            String address = data.getStringExtra(LocalAddEditEventActivity.EXTRA_ADDRESS);
+            String description = data.getStringExtra(LocalAddEditEventActivity.EXTRA_DESCRIPTION);
+            String start_ts = data.getStringExtra(LocalAddEditEventActivity.EXTRA_START_TS);
 
             //String uid = userManager.getUser().getUid();
             EventRoom eventRoom = new EventRoom(event_id ,event_title, address, description,"s",start_ts);
