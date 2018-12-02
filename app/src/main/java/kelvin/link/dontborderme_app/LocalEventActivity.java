@@ -46,7 +46,7 @@ public class LocalEventActivity extends AppCompatActivity{
                     startActivity(subscriber_intent);
                     return true;
                 case R.id.navigation_me:
-                    Intent settings_intent = new Intent(LocalEventActivity.this, SettingsActivity.class);
+                    Intent settings_intent = new Intent(LocalEventActivity.this, MeActivity.class);
                     startActivity(settings_intent);
                     return true;
             }

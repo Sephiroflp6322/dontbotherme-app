@@ -28,21 +28,29 @@
         <activity
             android:name=".SendEventActivity"
             android:label=""
-            android:parentActivityName=".LocalEventActivity"></activity>
+            android:parentActivityName=".LocalEventActivity" />
         <activity
             android:name=".SubscribeEventActivity"
             android:label=""
-            android:parentActivityName=".SendEventActivity"></activity>
+            android:parentActivityName=".SendEventActivity" />
         <activity android:name=".ScanCodeActivity" />
         <activity
             android:name=".LocalAddEditEventActivity"
-            android:parentActivityName=".LocalEventActivity"></activity>
+            android:parentActivityName=".LocalEventActivity" />
         <activity
             android:name=".SendAddEditEventActivity"
-            android:parentActivityName=".SendEventActivity"></activity>
+            android:parentActivityName=".SendEventActivity" />
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
+            android:parentActivityName=".SubscribeEventActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="kelvin.link.dontborderme_app.SubscribeEventActivity" />
+        </activity>
+        <activity
+            android:name=".MeActivity"
+            android:label="@string/title_activity_me"
             android:parentActivityName=".SubscribeEventActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
