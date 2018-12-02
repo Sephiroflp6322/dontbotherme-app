@@ -184,7 +184,7 @@ public class SendAddEditEventActivity extends AppCompatActivity implements DateP
         calendar.set(Calendar.YEAR, i-1900);
         calendar.set(Calendar.MONTH, i1);
         calendar.set(Calendar.DAY_OF_MONTH, i2);
-        String dateTime = String.valueOf(i) + "-" + String.valueOf(i1+1)+ "-" + String.valueOf(i2);
+        String dateTime = new Timestamp(i-1900, i1, i2, 0, 0, 0, 0).toString().substring(0,10);
         editTextDateTime.setText(dateTime);
         //start_ts = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
     }
@@ -192,10 +192,16 @@ public class SendAddEditEventActivity extends AppCompatActivity implements DateP
     @Override
     public void onTimeSet(TimePicker timePicker, int i, int i1) {
         //TODO [low priority] Need to refactor timestamp generation
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        String dateTime = new Timestamp(year, month, day, i, i1, 0, 0).toString().substring(0, 19);
-        editTextDateTime.setText(dateTime);
+        if(!editTextDateTime.getText().toString().isEmpty())
+        {
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            String dateTime = new Timestamp(year, month, day, i, i1, 0, 0).toString().substring(0, 19);
+            editTextDateTime.setText(dateTime);
+        }else{
+            Toast.makeText(this, "Please select date first", Toast.LENGTH_LONG).show();
+        }
+
     }
 }

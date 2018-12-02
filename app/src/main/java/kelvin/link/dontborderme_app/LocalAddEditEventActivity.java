@@ -31,20 +31,20 @@ public class LocalAddEditEventActivity extends AppCompatActivity implements Date
     private EditText editTextTitle;
     private EditText editTextAddress;
     private EditText editTextDescription;
+    private EditText editTextDateTime;
     private String start_ts;
 
     private Calendar calendar;
-    private TextView textViewDateTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_local_add_edit);
 
-        editTextTitle = findViewById(R.id.edit_text_title);
-        editTextAddress = findViewById(R.id.edit_text_address);
-        editTextDescription = findViewById(R.id.edit_text_description);
-        textViewDateTime = (TextView)findViewById(R.id.textView_DateTime);
+        editTextTitle = findViewById(R.id.local_edit_text_title);
+        editTextAddress = findViewById(R.id.local_edit_text_address);
+        editTextDescription = findViewById(R.id.local_edit_text_description);
+        editTextDateTime = findViewById(R.id.local_edit_text_DateTime);
 
         calendar = Calendar.getInstance();
 
@@ -57,7 +57,7 @@ public class LocalAddEditEventActivity extends AppCompatActivity implements Date
             editTextTitle.setText(intent.getStringExtra(EXTRA_EVENT_TITLE));
             editTextAddress.setText(intent.getStringExtra(EXTRA_ADDRESS));
             editTextDescription.setText(intent.getStringExtra(EXTRA_DESCRIPTION));
-            textViewDateTime.setText(intent.getStringExtra(EXTRA_START_TS));
+            editTextDateTime.setText(intent.getStringExtra(EXTRA_START_TS));
         }else{
             setTitle("Add Event");
         }
@@ -138,18 +138,24 @@ public class LocalAddEditEventActivity extends AppCompatActivity implements Date
         calendar.set(Calendar.YEAR, i-1900);
         calendar.set(Calendar.MONTH, i1);
         calendar.set(Calendar.DAY_OF_MONTH, i2);
-        start_ts = String.valueOf(i) + "-" + String.valueOf(i1+1)+ "-" + String.valueOf(i2);
-        textViewDateTime.setText(start_ts);
+        String dateTime = new Timestamp(i-1900, i1, i2, 0, 0, 0, 0).toString().substring(0,10);
+        editTextDateTime.setText(dateTime);
         //start_ts = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
     }
 
     @Override
     public void onTimeSet(TimePicker timePicker, int i, int i1) {
         //TODO [low priority] Need to refactor timestamp generation
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        start_ts = new Timestamp(year, month, day, i, i1, 0, 0).toString().substring(0, 19);
-        textViewDateTime.setText(start_ts);
+        if(!editTextDateTime.getText().toString().isEmpty())
+        {
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            String dateTime = new Timestamp(year, month, day, i, i1, 0, 0).toString().substring(0, 19);
+            editTextDateTime.setText(dateTime);
+        }else{
+            Toast.makeText(this, "Please select date first", Toast.LENGTH_LONG).show();
+        }
+
     }
 }
