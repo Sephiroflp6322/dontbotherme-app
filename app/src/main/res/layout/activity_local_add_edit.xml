@@ -49,17 +49,32 @@
             android:inputType="datetime"/>
 
 
-        <Button
-            android:id="@+id/btn_date_picker"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Date Picker"/>
+            android:layout_height="match_parent"
+            android:layoutDirection="ltr"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <Button
+                android:id="@+id/local_date_picker"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_marginRight="10dp"
+                android:text="Date Picker" />
 
-        <Button
-            android:id="@+id/btn_time_picker"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Time Picker" />
+            <Button
+                android:id="@+id/local_time_picker"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_marginLeft="10dp"
+                android:text="Time Picker" />
+        </LinearLayout>
 
 
     </LinearLayout>

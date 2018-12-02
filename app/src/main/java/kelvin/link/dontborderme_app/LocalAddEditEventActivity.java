@@ -64,7 +64,7 @@ public class LocalAddEditEventActivity extends AppCompatActivity implements Date
 
 
         //Date picker
-        Button DatePicker_Btn = (Button)findViewById(R.id.btn_date_picker);
+        Button DatePicker_Btn = (Button)findViewById(R.id.local_date_picker);
         DatePicker_Btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -74,7 +74,7 @@ public class LocalAddEditEventActivity extends AppCompatActivity implements Date
         });
 
         //Time Picker
-        Button TimePicker_Btn = (Button)findViewById(R.id.btn_time_picker);
+        Button TimePicker_Btn = (Button)findViewById(R.id.local_time_picker);
         TimePicker_Btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
