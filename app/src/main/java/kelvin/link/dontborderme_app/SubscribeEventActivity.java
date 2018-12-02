@@ -58,6 +58,10 @@ public class SubscribeEventActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_subscriber:
                     return true;
+                case R.id.navigation_me:
+                    Intent settings_intent = new Intent(SubscribeEventActivity.this, SettingsActivity.class);
+                    startActivity(settings_intent);
+                    return true;
             }
             return false;
         }

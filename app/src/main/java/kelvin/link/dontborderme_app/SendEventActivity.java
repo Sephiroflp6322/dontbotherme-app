@@ -58,6 +58,10 @@ public class SendEventActivity extends AppCompatActivity {
                     Intent subscriber_intent = new Intent(SendEventActivity.this, SubscribeEventActivity.class);
                     startActivity(subscriber_intent);
                     return true;
+                case R.id.navigation_me:
+                    Intent settings_intent = new Intent(SendEventActivity.this, SettingsActivity.class);
+                    startActivity(settings_intent);
+                    return true;
             }
             return false;
         }

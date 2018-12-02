@@ -45,6 +45,10 @@ public class LocalEventActivity extends AppCompatActivity{
                     Intent subscriber_intent = new Intent(LocalEventActivity.this, SubscribeEventActivity.class);
                     startActivity(subscriber_intent);
                     return true;
+                case R.id.navigation_me:
+                    Intent settings_intent = new Intent(LocalEventActivity.this, SettingsActivity.class);
+                    startActivity(settings_intent);
+                    return true;
             }
             return false;
         }
@@ -103,7 +107,7 @@ public class LocalEventActivity extends AppCompatActivity{
                 //String uid = swipedEvent.getUid();
                 Integer event_id = swipedEvent.getEvent_id();
                 eventRoomViewModel.delete(event_id);
-                Toast.makeText(LocalEventActivity.this, "Event deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LocalEventActivity.this, "Event Deleted", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
 
@@ -144,12 +148,12 @@ public class LocalEventActivity extends AppCompatActivity{
             EventRoom event = new EventRoom(null , event_title, address,description, "s",start_ts);
             eventRoomViewModel.insert(event);
 
-            Toast.makeText(this, "Event saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
 
         }else if(requestCode == EDIT_EVENT_REQUEST && resultCode == RESULT_OK){
             Integer event_id = data.getIntExtra(LocalAddEditEventActivity.EXTRA_EVENT_ID, -1);
             if(event_id == -1){
-                Toast.makeText(this, "Event can't be updated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Fail to Save", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -163,9 +167,9 @@ public class LocalEventActivity extends AppCompatActivity{
             eventRoom.setEvent_id(event_id);
             eventRoomViewModel.update(eventRoom);
 
-            Toast.makeText(this, "Event updated", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Updated", Toast.LENGTH_SHORT).show();
         }else{
-            Toast.makeText(this, "Fail to save", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Fail to Update", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -182,7 +186,7 @@ public class LocalEventActivity extends AppCompatActivity{
         switch (item.getItemId()){
             case R.id.delete_all_events:
                 eventRoomViewModel.deleteAllEvents();
-                Toast.makeText(this, "All events deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "All Events Deleted", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
