@@ -8,14 +8,10 @@
     tools:context="kelvin.link.dontborderme_app.MeActivity">
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/me_recycler_view"
+    <ListView
+        android:id="@+id/me_list_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/cardview_light_background"
-        android:scrollbars="vertical"
-        tools:listitem="@layout/me_event_item"
-        android:layout_marginBottom="70dp" />
+        android:layout_height="match_parent" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/me_activity_navigation"

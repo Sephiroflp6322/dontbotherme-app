@@ -1,12 +1,22 @@
 package kelvin.link.dontborderme_app;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class MeActivity extends AppCompatActivity {
 
@@ -46,6 +56,103 @@ public class MeActivity extends AppCompatActivity {
         navigation.setSelectedItemId(R.id.navigation_me);
 
 
+        // Setup the data source
+        ArrayList<Item> itemsArrayList = generateItemsList(); // calls function to get items list
+
+        // instantiate the custom list adapter
+        CustomListAdapter adapter = new CustomListAdapter(this, itemsArrayList);
+
+        // get the ListView and attach the adapter
+        final ListView itemsListView  = (ListView) findViewById(R.id.me_list_view);
+        itemsListView.setAdapter(adapter);
+        itemsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                TextView textView = (TextView) view.findViewById(R.id.me_title);
+                String str = textView.getText().toString();
+                if(str == "User"){
+                    //TODO start activity login
+                }else if(str == "Settings"){
+                    Intent subscribe_intent = new Intent(MeActivity.this, SettingsActivity.class);
+                    startActivity(subscribe_intent);
+                }else{
+                    //Do nothing
+                }
+            }
+        });
+
+
+    }
+
+    public class Item{
+        public int icon;
+        public String title;
+        Item(int icon, String title){
+            this.icon = icon;
+            this.title = title;
+        }
+
+    }
+
+    public ArrayList<Item> generateItemsList(){
+        ArrayList<Item> items = new ArrayList<Item>();
+        items.add(new Item(R.drawable.ic_user, "User"));
+        items.add(new Item(R.drawable.ic_settings, "Settings"));
+        return items;
+    }
+
+
+
+
+    public class CustomListAdapter extends BaseAdapter {
+        private Context context; //context
+        private ArrayList<Item> items; //data source of the list adapter
+
+        //public constructor
+        public CustomListAdapter(Context context, ArrayList<Item> items) {
+            this.context = context;
+            this.items = items;
+        }
+
+        @Override
+        public int getCount() {
+            return items.size(); //returns total of items in the list
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return items.get(position); //returns list item at the specified position
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            // inflate the layout for each list row
+            if (convertView == null) {
+                convertView = LayoutInflater.from(context).
+                        inflate(R.layout.me_event_item, parent, false);
+            }
+
+            // get current item to be displayed
+            Item currentItem = (Item) getItem(position);
+
+            // get the TextView for item name and item description
+            ImageView imageView = (ImageView)
+                    convertView.findViewById(R.id.me_item_icon);
+            TextView textView = (TextView)
+                    convertView.findViewById(R.id.me_title);
+
+            //sets the text for item name and item description from the current item object
+            imageView.setImageResource(currentItem.icon);
+            textView.setText(currentItem.title);
+
+            // returns the view for the current row
+            return convertView;
+        }
     }
 
 }
