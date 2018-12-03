@@ -3,6 +3,7 @@ package kelvin.link.dontborderme_app;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.zxing.Result;
 
@@ -51,10 +52,11 @@ public class ScanCodeActivity extends AppCompatActivity implements ZXingScannerV
         //TODO Handling qr code scan result here
         String text = result.getText();
         String[] splitStr = text.trim().split("\\s+");
-        String uid = splitStr[0];
+        String uid = UserManager.getInstance().getUser().getUid();
         Integer event_id = Integer.parseInt(splitStr[1]);
-        Log.i(logMessage, "uid: " + uid + "    event_id: " + String.valueOf(event_id));
         subscribeEvent(uid, event_id);
+        Log.i(logMessage, "uid: " + uid + "    event_id: " + String.valueOf(event_id));
+        Toast.makeText(this, "Subscribe to "+ String.valueOf(event_id), Toast.LENGTH_SHORT).show();
         onBackPressed();
     }
 

@@ -16,7 +16,7 @@ public class UserManager {
     public static UserManager getInstance(){
         if(instance == null){
             //TODO [Hardcode] Need to implement as auto fetch user info
-            instance = new UserManager("kelvin@gmail.com", "12345678");
+            instance = new UserManager("guest@gmail.com", "12345678");
             return instance;
         }else{
             return instance;
@@ -26,5 +26,10 @@ public class UserManager {
     //Getters
     public User getUser(){
         return user;
+    }
+
+    //Setters
+    public void setUser(User user){
+        this.user = user;
     }
 }

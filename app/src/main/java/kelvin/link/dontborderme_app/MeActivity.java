@@ -15,10 +15,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MeActivity extends AppCompatActivity {
+public class MeActivity extends AppCompatActivity implements LoginDialog.LoginDialogListener{
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -72,7 +73,10 @@ public class MeActivity extends AppCompatActivity {
                 String str = textView.getText().toString();
                 if(str == "User"){
                     //TODO start activity login
+                    LoginDialog loginDialog = new LoginDialog();
+                    loginDialog.show(getSupportFragmentManager(), "Login dialog");
                 }else if(str == "Settings"){
+                    //Start activity settings
                     Intent subscribe_intent = new Intent(MeActivity.this, SettingsActivity.class);
                     startActivity(subscribe_intent);
                 }else{
@@ -82,6 +86,14 @@ public class MeActivity extends AppCompatActivity {
         });
 
 
+    }
+
+
+
+    @Override
+    public void onResult(String username, String password) {
+        UserManager.getInstance().setUser(new User(username, password));
+        Toast.makeText(this, "Login Success " + username, Toast.LENGTH_LONG).show();
     }
 
     public class Item{

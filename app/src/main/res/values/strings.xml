@@ -6,6 +6,9 @@
     <string name="title_me">Me</string>
     <string name="title_activity_settings">Settings</string>
 
+
+    <string name="app_shared_preference">dontbotherme_app_shared_preference</string>
+
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->
