@@ -4,6 +4,7 @@ package kelvin.link.dontborderme_app;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ public class EventDetailDialog extends AppCompatDialogFragment {
     public static final String EXTRA_DESCRIPTION = "EXTRA_DESCRIPTION";
     public static final String EXTRA_START_TS= "EXTRA_START_TS";
 
+    public static final int EDIT_EVENT_REQUEST = 2;
 
     private ImageView mImageView;
     private ImageView mEditImage;
@@ -48,11 +50,25 @@ public class EventDetailDialog extends AppCompatDialogFragment {
         View itemView = inflater.inflate(R.layout.event_detail_dialog, null);
 
         //mImageView = itemView.findViewById(R.id.detail_dialog_icon);
-        //mEditImage = itemView.findViewById(R.id.detail_dialog_edit);
+        mEditImage = itemView.findViewById(R.id.detail_dialog_edit);
         textViewTitle = itemView.findViewById(R.id.detail_dialog_title);
         textViewAddress = itemView.findViewById(R.id.detail_dialog_address);
         textViewDescription = itemView.findViewById(R.id.detail_dialog_description);
         textViewStartTs = itemView.findViewById(R.id.detail_dialog_startTs);
+
+
+        mEditImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SendAddEditEventActivity.class);
+                intent.putExtra(SendAddEditEventActivity.EXTRA_EVENT_ID, event_id);
+                intent.putExtra(SendAddEditEventActivity.EXTRA_EVENT_TITLE, event_title);
+                intent.putExtra(SendAddEditEventActivity.EXTRA_ADDRESS, address);
+                intent.putExtra(SendAddEditEventActivity.EXTRA_DESCRIPTION, description);
+                intent.putExtra(SendAddEditEventActivity.EXTRA_START_TS, start_ts);
+                startActivityForResult(intent, EDIT_EVENT_REQUEST);
+            }
+        });
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
