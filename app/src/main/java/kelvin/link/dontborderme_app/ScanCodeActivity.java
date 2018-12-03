@@ -56,7 +56,7 @@ public class ScanCodeActivity extends AppCompatActivity implements ZXingScannerV
         Integer event_id = Integer.parseInt(splitStr[1]);
         subscribeEvent(uid, event_id);
         Log.i(logMessage, "uid: " + uid + "    event_id: " + String.valueOf(event_id));
-        Toast.makeText(this, "Subscribe to "+ String.valueOf(event_id), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Subscribe to event "+ String.valueOf(event_id), Toast.LENGTH_SHORT).show();
         onBackPressed();
     }
 

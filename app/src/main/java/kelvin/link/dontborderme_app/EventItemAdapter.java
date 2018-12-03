@@ -16,8 +16,10 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventItemAdapter.Exam
 
     public interface OnItemClickListener{
         void onItemClick(int position);
-        void onDeleteClick(int position);
         void onIconClick(int position);
+        void onEditClick(int position);
+        void onDeleteClick(int position);
+
     }
 
     public void setOnItemClickListener(OnItemClickListener listener){
