@@ -45,7 +45,6 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="40dp"
             android:layout_toEndOf="@+id/send_icon"
-            android:layout_toRightOf="@id/subscribe_delete"
             android:ellipsize="end"
             android:maxLines="1"
             tools:ignore="InvalidId" />
@@ -64,9 +63,9 @@
             android:textSize="15sp" />
 
         <ImageView
-            android:id="@+id/send_delete"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:id="@+id/send_none"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_below="@id/send_startTs"
             android:layout_alignParentRight="true"
             android:layout_marginTop="14dp"

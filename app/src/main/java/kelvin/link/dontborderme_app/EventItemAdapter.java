@@ -18,8 +18,6 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventItemAdapter.Exam
         void onItemClick(int position);
         void onIconClick(int position);
         void onEditClick(int position);
-        void onDeleteClick(int position);
-
     }
 
     public void setOnItemClickListener(OnItemClickListener listener){
@@ -33,7 +31,7 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventItemAdapter.Exam
 
     public static class ExampleViewHolder extends RecyclerView.ViewHolder{
         private ImageView mImageView;
-        private ImageView mDeleteImage;
+        private ImageView mEditImage;
         private TextView textViewTitle;
         private TextView textViewAddress;
         private TextView textViewDescription;
@@ -42,7 +40,7 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventItemAdapter.Exam
         public ExampleViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
             mImageView = itemView.findViewById(R.id.subscribe_icon);
-            mDeleteImage = itemView.findViewById(R.id.subscribe_delete);
+            mEditImage = itemView.findViewById(R.id.subscribe_edit);
             textViewTitle = itemView.findViewById(R.id.subscribe_title);
             textViewAddress = itemView.findViewById(R.id.subscribe_address);
             textViewDescription = itemView.findViewById(R.id.subscribe_description);
@@ -62,13 +60,13 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventItemAdapter.Exam
                 }
             });
 
-            mDeleteImage.setOnClickListener(new View.OnClickListener() {
+            mEditImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if(listener != null){
                         int postion = getAdapterPosition();
                         if(postion != RecyclerView.NO_POSITION){
-                            listener.onDeleteClick(postion);
+                            listener.onEditClick(postion);
                         }
                     }
                 }

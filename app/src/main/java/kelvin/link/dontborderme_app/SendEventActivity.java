@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -102,25 +103,9 @@ public class SendEventActivity extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new EventItemAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Event event = eventItemArrayList.get(position).getEvent();
-                Intent intent = new Intent(SendEventActivity.this, SendAddEditEventActivity.class);
-                intent.putExtra(SendAddEditEventActivity.EXTRA_EVENT_ID, event.getEvent_id());
-                intent.putExtra(SendAddEditEventActivity.EXTRA_EVENT_TITLE, event.getEvent_title());
-                intent.putExtra(SendAddEditEventActivity.EXTRA_ADDRESS, event.getAddress());
-                intent.putExtra(SendAddEditEventActivity.EXTRA_DESCRIPTION, event.getDescription());
-                intent.putExtra(SendAddEditEventActivity.EXTRA_START_TS, event.getStart_ts());
-
-                startActivityForResult(intent, EDIT_EVENT_REQUEST);
+                //Do nothing
             }
 
-            @Override
-            public void onDeleteClick(int position) {
-                Integer event_id = eventItemArrayList.get(position).getEvent().getEvent_id();
-                WebServiceDAO webServiceDAO = new WebServiceDAO();
-                webServiceDAO.deleteEvent(user.getUid(), event_id);
-                removeItem(position);
-                Toast.makeText(SendEventActivity.this, "Event deleted", Toast.LENGTH_SHORT).show();
-            }
 
             @Override
             public void onIconClick(int position) {
@@ -131,7 +116,40 @@ public class SendEventActivity extends AppCompatActivity {
                 qrCodeDialog.setArguments(bundle);
                 qrCodeDialog.show(getSupportFragmentManager(), "QR Dialog");
             }
+
+            @Override
+            public void onEditClick(int position) {
+                Event event = eventItemArrayList.get(position).getEvent();
+                Intent intent = new Intent(SendEventActivity.this, SendAddEditEventActivity.class);
+                intent.putExtra(SendAddEditEventActivity.EXTRA_EVENT_ID, event.getEvent_id());
+                intent.putExtra(SendAddEditEventActivity.EXTRA_EVENT_TITLE, event.getEvent_title());
+                intent.putExtra(SendAddEditEventActivity.EXTRA_ADDRESS, event.getAddress());
+                intent.putExtra(SendAddEditEventActivity.EXTRA_DESCRIPTION, event.getDescription());
+                intent.putExtra(SendAddEditEventActivity.EXTRA_START_TS, event.getStart_ts());
+
+                startActivityForResult(intent, EDIT_EVENT_REQUEST);
+            }
         });
+
+
+        //For delete
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+                Integer event_id = eventItemArrayList.get(position).getEvent().getEvent_id();
+                WebServiceDAO webServiceDAO = new WebServiceDAO();
+                webServiceDAO.deleteEvent(user.getUid(), event_id);
+                removeItem(position);
+                Toast.makeText(SendEventActivity.this, "Event Deleted", Toast.LENGTH_SHORT).show();
+            }
+        }).attachToRecyclerView(mRecyclerView);
 
     }
 

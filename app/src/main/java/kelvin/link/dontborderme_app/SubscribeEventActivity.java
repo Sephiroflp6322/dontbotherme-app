@@ -11,6 +11,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -105,18 +106,38 @@ public class SubscribeEventActivity extends AppCompatActivity {
                 //TODO Set onclick event
             }
 
-            @Override
-            public void onDeleteClick(int position) {
-                Integer event_id = eventItemArrayList.get(position).getEvent().getEvent_id();
-                deleteEvent(user.getUid(), event_id);
-                removeItem(position);
-            }
 
             @Override
             public void onIconClick(int position) {
                 //Do nothing
             }
+
+            @Override
+            public void onEditClick(int position) {
+                //Do nothing
+            }
         });
+
+
+
+        //For delete
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+                Integer event_id = eventItemArrayList.get(position).getEvent().getEvent_id();
+                WebServiceDAO webServiceDAO = new WebServiceDAO();
+                webServiceDAO.deleteEvent(user.getUid(), event_id);
+                removeItem(position);
+                Toast.makeText(SubscribeEventActivity.this, "Unsubscribe", Toast.LENGTH_SHORT).show();
+            }
+        }).attachToRecyclerView(mRecyclerView);
 
 
     }
