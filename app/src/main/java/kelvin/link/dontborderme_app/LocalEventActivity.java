@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,6 +26,7 @@ import android.widget.Toolbar;
 import java.util.List;
 
 public class LocalEventActivity extends AppCompatActivity{
+    private static final String logMessage = "LocalEventActivity";
     public static final int ADD_EVENT_REQUEST = 1;
     public static final int EDIT_EVENT_REQUEST = 2;
     private EventRoomViewModel eventRoomViewModel;
@@ -150,6 +152,8 @@ public class LocalEventActivity extends AppCompatActivity{
             //String uid = userManager.getUser().getUid();
             EventRoom event = new EventRoom(null , event_title, address,description, "s",start_ts);
             eventRoomViewModel.insert(event);
+
+            Log.i(logMessage, "onActivityResult Add: start_ts--> " + start_ts);
 
             Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
 

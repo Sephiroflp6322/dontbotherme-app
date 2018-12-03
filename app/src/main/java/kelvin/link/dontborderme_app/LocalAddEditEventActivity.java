@@ -32,7 +32,6 @@ public class LocalAddEditEventActivity extends AppCompatActivity implements Date
     private EditText editTextAddress;
     private EditText editTextDescription;
     private EditText editTextDateTime;
-    private String start_ts;
 
     private Calendar calendar;
 
@@ -90,6 +89,7 @@ public class LocalAddEditEventActivity extends AppCompatActivity implements Date
         String title = editTextTitle.getText().toString();
         String address = editTextAddress.getText().toString();
         String description = editTextDescription.getText().toString();
+        String start_ts = editTextDateTime.getText().toString();
 
         if(title.trim().isEmpty()){
             Toast.makeText(this, "Please insert a title", Toast.LENGTH_SHORT).show();
