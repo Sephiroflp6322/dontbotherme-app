@@ -17,6 +17,7 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventItemAdapter.Exam
     public interface OnItemClickListener{
         void onItemClick(int position);
         void onIconClick(int position);
+        void onTitleClick(int position);
         void onEditClick(int position);
     }
 
@@ -55,6 +56,18 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventItemAdapter.Exam
                         int postion = getAdapterPosition();
                         if(postion != RecyclerView.NO_POSITION){
                             listener.onItemClick(postion);
+                        }
+                    }
+                }
+            });
+
+            textViewTitle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(listener != null){
+                        int postion = getAdapterPosition();
+                        if(postion != RecyclerView.NO_POSITION){
+                            listener.onTitleClick(postion);
                         }
                     }
                 }

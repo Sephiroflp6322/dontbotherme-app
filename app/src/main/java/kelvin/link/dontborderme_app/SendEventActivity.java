@@ -29,7 +29,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class SendEventActivity extends AppCompatActivity {
+public class SendEventActivity extends AppCompatActivity implements EventDetailDialog.EventDetailListener{
     private static final String TIMESTAMP_ZERO = "0000-00-00 00:00:00";
     private String logMessage = "ScanCodeActivity";
     public static final int ADD_EVENT_REQUEST = 1;
@@ -106,6 +106,19 @@ public class SendEventActivity extends AppCompatActivity {
                 //Do nothing
             }
 
+            @Override
+            public void onTitleClick(int position) {
+                Event event = eventItemArrayList.get(position).getEvent();
+                Bundle bundle = new Bundle();
+                bundle.putInt(EventDetailDialog.EXTRA_EVENT_ID, event.getEvent_id());
+                bundle.putString(EventDetailDialog.EXTRA_EVENT_TITLE, event.getEvent_title());
+                bundle.putString(EventDetailDialog.EXTRA_ADDRESS, event.getAddress());
+                bundle.putString(EventDetailDialog.EXTRA_DESCRIPTION, event.getDescription());
+                bundle.putString(EventDetailDialog.EXTRA_START_TS, event.getStart_ts());
+                EventDetailDialog eventDetailDialog = new EventDetailDialog();
+                eventDetailDialog.setArguments(bundle);
+                eventDetailDialog.show(getSupportFragmentManager(), "Event Detail");
+            }
 
             @Override
             public void onIconClick(int position) {
@@ -226,4 +239,8 @@ public class SendEventActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onResult() {
+        //EventDialogListener handle result
+    }
 }
