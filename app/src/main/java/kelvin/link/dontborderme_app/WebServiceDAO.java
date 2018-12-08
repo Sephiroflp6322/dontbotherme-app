@@ -24,7 +24,7 @@ public class WebServiceDAO {
 
     public WebServiceDAO() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://59.149.35.12/")
+                .baseUrl("http://59.149.35.12/dontborderme_webservice/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

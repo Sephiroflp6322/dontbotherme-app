@@ -85,7 +85,7 @@ public class SendEventActivity extends AppCompatActivity implements EventDetailD
 
         //Setting up retrofit connection
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://59.149.35.12/")
+                .baseUrl("http://59.149.35.12/dontborderme_webservice/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
